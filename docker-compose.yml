@@ -1,0 +1,28 @@
+version: "3.1"
+
+services:
+  apache:
+    container_name: Projet-apache
+    build:
+      context: ./Docker/apache
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - "5555:80"
+
+  db:
+    container_name: Projet-SQL
+    image: mariadb:10.6.4
+    restart: always
+    environment:
+      - MYSQL_DATABASE=projet
+      - MYSQL_ROOT_PASSWORD=azerty
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "8001:80"
+    restart: always
+    environment:
+      - PMA_ARBITRARY=1

@@ -6,7 +6,57 @@ class Authors
 {
     private string $firstName;
     private string $lastName;
-    private string $email;
+    private string $mail;
+    private string $pswd;
+    private bool $admin;
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->admin;
+    }
+
+    /**
+     * @param bool $admin
+     */
+    public function setAdmin(bool $admin): void
+    {
+        $this->admin = $admin;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMail(): string
+    {
+        return $this->mail;
+    }
+
+    /**
+     * @param string $mail
+     */
+    public function setMail(string $mail): void
+    {
+        $this->mail = $mail;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPswd(): string
+    {
+        return $this->pswd;
+    }
+
+    /**
+     * @param string $pswd
+     */
+    public function setPswd(string $pswd): void
+    {
+        $this->pswd = $pswd;
+    }
 
     /**
      * @return string

@@ -1,19 +1,29 @@
-use Controller\ErrorController; //TODO
+<?php
 
+namespace App\Framework;
+
+//use Controller\ErrorController; TODO
 
 class Router
 {
     public function getController()
     {
         $xml = new \DOMDocument();
-        $xml->load('./routes.xml');
+        $xml->load(__DIR__ . '/routes.xml');
         $routes = $xml->getElementsByTagName('route');
 
-        isset($_GET['p']) ? path = htmlspecialchars($_GET['p']) : $path = "";
+        
+        if(isset($_GET['p'])) {
+            $path = htmlspecialchars($_GET['p']);
+        }
+        else {
+            $path = "";
+        } 
+        
 
         foreach ($routes as $route) {
             if ($path === $route->getAttribute('p')) {
-                $controllerClass = 'Controller\\' . $route->getAttribute('controller');
+                $controllerClass = 'App\\Controller\\' . $route->getAttribute('controller');
                 $action = $route->getAttribute('action');
                 $params = [];
                 if ($route->hasAttribute('params')) {
@@ -26,6 +36,6 @@ class Router
             }
         }
 
-        return new ErrorController('noRoute');
+        //return new ErrorController('noRoute'); TODO
     }
 }

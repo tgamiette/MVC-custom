@@ -2,9 +2,7 @@
 
 require 'vendor/autoload.php';
 
-use App\Entity\Post;
+use App\Framework\Router;
 
-$post = new Post();
-
-$postmanager = new \App\Manager\PostManager();
-var_dump($postmanager->findAll());
+$router = new Router();
+$router->getController();

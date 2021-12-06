@@ -7,7 +7,7 @@ class BaseManager
 {
     protected \PDO $db;
 
-    public function __construct(\PDO $pdo)
+    public function __construct()
     {
         $this->db = PDOFactory::getMysqlConnection();
     }

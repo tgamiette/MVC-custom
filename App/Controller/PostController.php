@@ -21,7 +21,7 @@ class PostController extends BaseController
     {
         $postManager = new PostManager();
         $posts = $postManager->findAll();
-        $this->render('Home.php', $posts, "Ici sont affiché les posts");
+        $this->render('Home.php', $posts, "Les posts");
     }
 
 }

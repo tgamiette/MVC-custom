@@ -1,5 +1,10 @@
 {
   "name": "tedjy/app",
+  "autoload": {
+    "psr-4": {
+      "App\\": "./"
+    }
+  },
   "authors": [
     {
       "name": "teddy",

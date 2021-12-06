@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'd45aa08fbe15d82c342293038eb0c2e297e8e710',
+    'reference' => '0a374c1b9268e875d9c1610fb9bcd5e42671c081',
     'name' => 'tedjy/app',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'd45aa08fbe15d82c342293038eb0c2e297e8e710',
+      'reference' => '0a374c1b9268e875d9c1610fb9bcd5e42671c081',
     ),
   ),
 );

@@ -7,7 +7,7 @@ services:
       context: ./Docker/apache
       dockerfile: Dockerfile
     volumes:
-      - ./app:/var/www/html
+      - ./App:/var/www/html
     ports:
       - "5555:80"
 

@@ -4,10 +4,10 @@ namespace App\Manager;
 
 class BaseManager
 {
-    private \PDO $PDO;
+    private \PDO $db;
 
-    public function __construct($pdo)
+    public function __construct(\PDO $pdo)
     {
-        $this->PDO = $pdo;
+        $this->db = $pdo;
     }
 }

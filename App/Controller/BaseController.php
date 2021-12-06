@@ -6,7 +6,7 @@ class BaseController
 {
     protected $params;
     protected $templateFile = "./../View.template.php";
-    protected $viewDIR = __DIR__."./../Views/Frontend/";
+    protected $viewDIR = __DIR__."./../Template/";
 
     public function __construct(string $action, array $params = [])
     {
@@ -21,14 +21,14 @@ class BaseController
 
     public function render(string $template, array $arguments, string $title)
     {
-//        $view = $this->.$this->viewDIR.$template;
+        $view = $this->viewDIR.$template;
 
 //        foreach ($arguments as $key => $value) {
-////            ${key} = $value;
+//            ${key} = $value;
 //        }
         ob_start();
-//        require $view;
-        $content = ob_get_clean();
+        require $view;
+        $body = ob_get_clean();
         require $this->templateFile;
         exit;
     }

@@ -25,23 +25,23 @@ class PostManager extends BaseManager
         return $query->fetch();
     }
 
-    public function deleteById(int $id): void
+    public function deleteById(int $id): bool
     {
         $query = $this->db->prepare('DELETE FROM post WHERE id = :id');
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
-        $query->execute();
+        return $query->execute();
     }
 
-    public function add(Post $post): void
+    public function add(Post $post): bool
     {
         $sql = "INSERT INTO post (`title`, `content`, `author`, `date_published`) VALUES (:title, :content, :author, :date_published);";
         $request = $this->db->prepare($sql);
-        $request->bindValue(':title', $post->getTitle(), \PDO::PARAM_INT);
+        $request->bindValue(':title', $post->getTitle(), \PDO::PARAM_STR);
         $request->bindValue(':content', $post->getContent(), \PDO::PARAM_STR);
-        $request->bindValue(':author', $post->getAuthor()->getId(), \PDO::PARAM_STR);
-        $request->bindValue(':date_published', $post->getDateTime(), \PDO::PARAM_INT);
+        $request->bindValue(':author', $post->getAuthor()->getId(), \PDO::PARAM_INT);
+        $request->bindValue(':date_published', $post->getDateTime(), \PDO::PARAM_STR);
 
-        $request->execute();
+        return $request->execute();
     }
 
 }

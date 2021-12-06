@@ -8,7 +8,11 @@ class PostController extends BaseController
 {
     private \PDO $postManager;
 
-    public function __construct() { }
+//    public function __construct(string $action, array $params = [])
+//    {
+//        parent::__construct($action, $params);
+//
+//    }
 
     /**
      * Show all post

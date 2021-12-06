@@ -17,7 +17,7 @@ class Router
             $path = htmlspecialchars($_GET['p']);
         }
         else {
-            $path = "";
+            $path = "/";
         } 
         
 

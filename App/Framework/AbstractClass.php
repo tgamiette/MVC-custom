@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Func;
+namespace App\Framework;
 
-class AbstractClass
+abstract class AbstractClass
 {
     public function hydrate(array $data)
     {

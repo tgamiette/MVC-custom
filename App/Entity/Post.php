@@ -2,10 +2,9 @@
 
 namespace App\Entity;
 
+use App\Framework\AbstractClass;
 
-use App\Func\AbstractClass;
-
-class Post
+class Post extends AbstractClass
 {
     private int $id;
     private string $content;

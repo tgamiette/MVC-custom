@@ -9,7 +9,7 @@ class Post extends AbstractClass
     private int $id;
     private string $content;
     private string $title;
-    private Authors $user;
+    private Author $author;
     private \DateTime $date_published;
 
     /**
@@ -93,18 +93,19 @@ class Post extends AbstractClass
     }
 
     /**
-     * @return Authors
+     * @return Author
      */
-    public function getUser(): Authors
+    public function getAuthor(): Author
     {
-        return $this->user;
+        return $this->author;
     }
 
+
     /**
-     * @param Authors $user
+     * @param Author $author
      */
-    public function setUser(Authors $user): void
+    public function setAuthor(Author $author): void
     {
-        $this->user = $user;
+        $this->author = $author;
     }
 }

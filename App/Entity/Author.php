@@ -2,15 +2,32 @@
 
 namespace App\Entity;
 
-use App\Func\AbstractClass;
+use App\Framework\AbstractClass;
 
-class Authors extends AbstractClass
+class Author extends AbstractClass
 {
     private string $firstName;
     private string $lastName;
     private string $mail;
     private string $pswd;
     private bool $admin;
+    private int $id;
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return bool

@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Manager;
-
 use App\Framework\PDOFactory;
 
-abstract class BaseManager
+class BaseManager
 {
-    public \PDO $dbo;
+    protected \PDO $db;
 
-    public function __construct()
+    public function __construct(\PDO $pdo)
     {
-        $this->dbo = PDOFactory::getMysqlConnection();
+        $this->db = PDOFactory::getMysqlConnection();
     }
 }

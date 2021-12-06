@@ -2,21 +2,35 @@
 
 namespace App\Manager;
 
-use App\Entity\Post;
+use App\Manager\BaseManager;
 
 class PostManager extends BaseManager
 {
 
-    public function findAll(): array
+    public function getAllPosts()
     {
-        $sql = "SELECT * FROM post ";
-        $query = $this->dbo->query($sql);
-        $tab=array();
-        $i=0;
-        $result = $query->fetchAll(\PDO::FETCH_ASSOC);
-        foreach ($result as $post){
-            $tab[$i] = new Post($post);
-        }
-        return $tab;
+        $query = $this->db->query('SELECT * FROM post');;
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\Post.php');
+        
+        return $query->fetchAll();
     }
+
+    public function getPostById(int $id)
+    {
+        $query = $this->db->prepare('SELECT * FROM post WHERE id = :id');
+        $query =bindValue(':id', $id, \PDO::PARAM_INT);
+        $query->execute();
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\Post.php');
+        
+        return $query->fetch();
+
+    }
+
+    public function deletePost(int $id)
+    {
+        $query = $this->db->prepare('DELETE FROM post WHERE id = :id');
+        $query =bindValue(':id', $id, \PDO::PARAM_INT);
+        $query->execute();
+    }
+
 }

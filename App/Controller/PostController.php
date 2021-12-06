@@ -6,12 +6,12 @@ namespace App\Controller;
 
 use App\entity;
 use App\Entity\Authors;
-use App\Framework;
+use App\Framework\PDOFactory;
 use App\Manager\PostManager;
 
 class PostController extends BaseController
 {
-    private \PDO $postmanager;
+    private \PDO $postManager;
 
     public function __construct() { }
 
@@ -20,15 +20,9 @@ class PostController extends BaseController
      */
     public function executeIndex()
     {
-        $postManager = new PostManager(Framework\PDOFactory::getMysqlConnection());
-        $posts = $postManager->getAllPost();
-        $this->render('Home.php',
-                      [
-                          'post' => $posts,
-                          'user' => new Authors(),
-                          'test' => "je sui un test",
-                      ],
-                      "Ceci es un titre"
-        );
+        $postManager = new PostManager();
+        $posts = $postManager->getAllPosts();
+        $this->render('Home.php', $posts, "Ici sont affiché les posts");
     }
+
 }

@@ -4,7 +4,7 @@ namespace App\Manager;
 
 class BaseManager
 {
-    private $PDO;
+    private \PDO $PDO;
 
     public function __construct($pdo)
     {

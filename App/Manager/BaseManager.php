@@ -2,12 +2,14 @@
 
 namespace App\Manager;
 
-class BaseManager
-{
-    private \PDO $PDO;
+use App\Framework\PDOFactory;
 
-    public function __construct($pdo)
+abstract class BaseManager
+{
+    public \PDO $dbo;
+
+    public function __construct()
     {
-        $this->PDO = $pdo;
+        $this->dbo = PDOFactory::getMysqlConnection();
     }
 }

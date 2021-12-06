@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
-class Authors
+use App\Func\AbstractClass;
+
+class Authors extends AbstractClass
 {
     private string $firstName;
     private string $lastName;

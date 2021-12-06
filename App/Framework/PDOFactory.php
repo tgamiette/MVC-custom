@@ -8,7 +8,7 @@ class PDOFactory
     private static string $user = "root";
     private static string $host = "db";
     private static string $dbname = "projet";
-    private static string $password = "root";
+    private static string $password = "azerty";
 
 
     public static function getMysqlConnection(): \PDO

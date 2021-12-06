@@ -4,24 +4,15 @@ namespace App\Framework;
 
 class PDOFactory
 {
-    private \PDO $PDO;
     private int $port = 64658;
-    private string $user = "root";
-    private string $host = "db";
-    private string $dbname = "projet";
-    private string $password = "root";
+    private static string $user = "root";
+    private static string $host = "db";
+    private static string $dbname = "projet";
+    private static string $password = "root";
 
-    public function __construct()
-    {
-        try {
-            $this->PDO = new \PDO("mysql:host=".$this->host.";dbname=".$this->dbname, $this->user, $this->password);
-        } catch (\Exception $th) {
-            die("error :".$th->getMessage());
-        }
-    }
 
-    public function getMysqlConnection(): \PDO
+    public static function getMysqlConnection(): \PDO
     {
-        return $this->PDO;
+        return new \PDO("mysql:host=".self::$host.";dbname=".self::$dbname, self::$user, self::$password);
     }
 }

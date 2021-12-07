@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Manager;
-use App\Framework\PDOFactory;
+use App\Framework\Database\PDOFactory;
 
 class BaseManager
 {

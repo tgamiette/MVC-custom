@@ -10,9 +10,14 @@ class PostManager extends BaseManager
 
     public function findAll(): array
     {
+        $i = 0;
         $query = $this->db->query("SELECT * FROM post");;
-//        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\Post.php');
-        return $query->fetchAll(\PDO::FETCH_ASSOC);
+        //        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\Post.php');
+        $tab = $query->fetchAll(\PDO::FETCH_ASSOC);
+        foreach ($tab as $post) {
+            $tab[$i] = new Post($post);
+        }
+        return $tab;
     }
 
     public function findById(int $id): Post
@@ -29,6 +34,7 @@ class PostManager extends BaseManager
     {
         $query = $this->db->prepare('DELETE FROM post WHERE id = :id');
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
+
         return $query->execute();
     }
 

@@ -23,12 +23,12 @@ class BaseController
         $this->$method();
     }
 
-    public function render(string $template, array $arguments, string $title)
+    public function render(string $template, array $args, string $title)
     {
         $view = $this->viewDIR.$template;
-        //        foreach ($arguments as $key => $value) {
-        //            ${key} = $value;
-        //        }
+                foreach ($args as $key => $value) {
+                    $key = $value;
+                }
         ob_start();
         require $view;
         $body = ob_get_clean();

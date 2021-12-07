@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Framework\AbstractClass;
+use App\Framework\Actions\AbstractClass;
 
 class Post extends AbstractClass
 {

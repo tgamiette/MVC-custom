@@ -2,19 +2,27 @@
 
 namespace App\Entity;
 
-use App\Framework\AbstractClass;
+use App\Framework\Actions\AbstractClass;
 
 class Comment extends AbstractClass
 {
     private int $id;
     private Author $author;
     private string  $content;
-    private \DateTime $date_published;
+    private \DateTime $datePublished;
 
     /**
      * @return \DateTime
      */
-    public function getDatePublished(): \DateTime
+    public function getDatePublished(): string
+    {
+        return $this->date_published->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDatePublishedObject(): \DateTime
     {
         return $this->date_published;
     }
@@ -44,21 +52,6 @@ class Comment extends AbstractClass
     }
     private Post $post;
 
-    /**
-     * @return \DateTime
-     */
-    public function getDateTime(): \DateTime
-    {
-        return $this->dateTime;
-    }
-
-    /**
-     * @param \DateTime $dateTime
-     */
-    public function setDateTime(\DateTime $dateTime): void
-    {
-        $this->dateTime = $dateTime;
-    }
 
     /**
      * @return int

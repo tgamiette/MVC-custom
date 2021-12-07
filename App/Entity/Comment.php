@@ -12,11 +12,11 @@ class Comment extends AbstractClass
     private \DateTime $datePublished;
 
     /**
-     * @return \DateTime
+     * @return string
      */
     public function getDatePublished(): string
     {
-        return $this->date_published->format('Y-m-d H:i:s');
+        return $this->datePublished->format('Y-m-d H:i:s');
     }
 
     /**

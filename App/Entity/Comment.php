@@ -8,8 +8,19 @@ class Comment extends AbstractClass
 {
     private int $id;
     private Author $author;
-    private string  $content;
+    private string $content;
     private \DateTime $datePublished;
+    private Post $post;
+
+    /**
+     * @param array $array
+     */
+    public function __construct(array $array)
+    {
+        if (empty($array)) {
+            $this->hydrate($array);
+        }
+    }
 
     /**
      * @return string
@@ -20,19 +31,19 @@ class Comment extends AbstractClass
     }
 
     /**
-     * @return \DateTime
-     */
-    public function getDatePublishedObject(): \DateTime
-    {
-        return $this->date_published;
-    }
-
-    /**
      * @param \DateTime $date_published
      */
     public function setDatePublished(\DateTime $date_published): void
     {
         $this->date_published = $date_published;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDatePublishedObject(): \DateTime
+    {
+        return $this->date_published;
     }
 
     /**
@@ -50,8 +61,6 @@ class Comment extends AbstractClass
     {
         $this->post = $post;
     }
-    private Post $post;
-
 
     /**
      * @return int

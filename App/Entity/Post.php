@@ -10,7 +10,17 @@ class Post extends AbstractClass
     private string $content;
     private string $title;
     private Author $author;
-    private \DateTime $date_published;
+    private \DateTime $datePublished;
+
+    /**
+     * @param array $array
+     */
+    public function __construct(array $array)
+    {
+        if (empty($array)) {
+            $this->hydrate($array);
+        }
+    }
 
     /**
      * @return string

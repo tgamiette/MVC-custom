@@ -5,11 +5,12 @@ namespace App\Manager;
 
 use App\Entity\Comment;
 
-class CommentManager extends BaseManager
+class  CommentManager extends BaseManager
 {
     public function findAll(): array
     {
         $query = $this->db->query("SELECT * FROM comment");;
+        // TODO voir avec le PROF
         //        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\comment.php');
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }

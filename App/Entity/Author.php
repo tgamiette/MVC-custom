@@ -2,16 +2,26 @@
 
 namespace App\Entity;
 
-use App\Framework\AbstractClass;
+use App\Framework\Actions\AbstractClass;
 
 class Author extends AbstractClass
 {
     private string $firstName;
     private string $lastName;
     private string $mail;
-    private string $pswd;
+    private string $password;
     private bool $admin;
     private int $id;
+
+    /**
+     * @param array $array
+     */
+    public function __construct(array $array)
+    {
+        if (empty($array)) {
+            $this->hydrate($array);
+        }
+    }
 
     /**
      * @return int
@@ -64,34 +74,19 @@ class Author extends AbstractClass
     /**
      * @return string
      */
-    public function getPswd(): string
+    public function getPassword(): string
     {
-        return $this->pswd;
+        return $this->password;
     }
 
     /**
-     * @param string $pswd
+     * @param string $password
      */
-    public function setPswd(string $pswd): void
+    public function setPassword(string $password): void
     {
-        $this->pswd = $pswd;
+        $this->password = $password;
     }
 
-    /**
-     * @return string
-     */
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     */
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
 
     /**
      * @return string

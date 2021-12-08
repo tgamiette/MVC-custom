@@ -4,5 +4,7 @@ namespace App\Manager;
 
 class AuthorManager extends BaseManager
 {
-
+    public function findAll() :array{
+        
+    }
 }

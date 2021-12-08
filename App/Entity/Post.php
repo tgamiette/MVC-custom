@@ -3,47 +3,16 @@
 namespace App\Entity;
 
 use App\Framework\Actions\AbstractClass;
+use App\Manager\AuthorManager;
 
-class Post extends AbstractClass
+
+class Post extends AbstractClass implements \JsonSerializable
 {
     private int $id;
     private string $content;
     private string $title;
     private $author;
     private \DateTime $datePublished;
-
-
-    /**
-     * @return string
-     */
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
-    /**
-     * @param string $content
-     */
-    public function setContent(string $content): void
-    {
-        $this->content = $content;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
 
     /**
      * @return \DateTime
@@ -56,7 +25,7 @@ class Post extends AbstractClass
     /**
      * @param \DateTime $datePublished
      */
-    public function setDatePublished( string $datePublished): void
+    public function setDatePublished(string $datePublished): void
     {
         $this->datePublished = new \DateTime($datePublished);
     }
@@ -93,14 +62,34 @@ class Post extends AbstractClass
         $this->dateTime = $dateTime;
     }
 
-    /**
-     * @return Author
-     */
-    public function getAuthor(): Author
+    public function jsonSerialize()
     {
+        return [
+            'author' => $this->getAuthor(),
+            'title' => $this->getTitle(),
+            'content' => $this->getContent(),
+        ];
+    }
+
+    /**
+     * @return int
+     */
+        public function getAuthor()
+    {
+//        var_dump($this->author);die();
         return $this->author;
     }
 
+
+    /**
+     * @return Author
+     */
+    public function getAuthorObjet() :Author
+    {
+        $authormanager=new AuthorManager();
+        $author= $authormanager->findById($this->getAuthor());
+        return $author;
+    }
 
     /**
      * @param Author $author
@@ -108,5 +97,37 @@ class Post extends AbstractClass
     public function setAuthor($author): void
     {
         $this->author = $author;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent(string $content): void
+    {
+        $this->content = $content;
     }
 }

@@ -12,31 +12,29 @@ abstract class BaseController
      * @param string $action
      * @param array $params
      */
-    public function __construct(string $action, array $params = [], $method="get")
+    public function __construct(string $action, array $params = [], $method = "get")
     {
-        if ($params) { 
-            foreach ($params as $param) {
-                $this->params[] = $param;
+        if ($params) {
+            foreach ($params as $key => $value) {
+                $this->params[$key] = $value;
             }
-        }
-        else 
+        } else {
             $this->params = $params;
+        }
 
         $method = $method.ucfirst($action);
         if ( !is_callable([$this, $method])) {
             throw new \RuntimeException('L\'action "'.$method.'"n\'est pas définie sur ce module');
         }
-        $this->$method($this->params[0]);
+        $this->$method($this->params);
     }
 
     public function render(string $template, array $args, string $title)
     {
         $view = $this->viewDIR.$template;
-        
         foreach ($args as $key => $value) {
             ${$key} = $value;
         }
-    
         ob_start();
         require $view;
         $body = ob_get_clean();

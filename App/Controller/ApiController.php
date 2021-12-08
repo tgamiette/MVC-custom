@@ -8,13 +8,18 @@ use App\Manager\PostManager;
 class ApiController extends BaseController
 {
     //$controllerClass($action, $params)
-    public function getPost(int $id = null)
+    public function getPost($params)
     {
+        $id = (int)$params['id'];
         $postmanager = new PostManager();
-        if (is_null($id)) {
+        if ($id == 0) {
             $posts = $postmanager->findAll();
+        } else {
+            $posts = $postmanager->findById($id);
+//            var_dump($posts);
         }
-        $posts = $postmanager->findById($id);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($posts);
     }
 
 

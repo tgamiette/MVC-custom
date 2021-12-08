@@ -12,7 +12,6 @@ class Router
         $xml->load(__DIR__.'/routes.xml');
         $routes = $xml->getElementsByTagName('route');
 
-
         if (isset($_GET['p'])) {
             $path = htmlspecialchars($_GET['p']);
         } else {
@@ -31,9 +30,11 @@ class Router
                         $params[$key] = $_GET[$key];
                     }
                 }
+
                 return new $controllerClass($action, $params);
             }
         }
+
         return new ErrorController('noRoute');
     }
 }

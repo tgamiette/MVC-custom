@@ -7,12 +7,6 @@ use App\Manager\PostManager;
 
 class PostController extends BaseController
 {
-    //    private PostManager $postmanager;
-    //
-    //    public function __construct(string $action, array $params = [])
-    //    {
-    //        parent::__construct($action, $params);
-    //    }
     /**
      * Show all post
      */

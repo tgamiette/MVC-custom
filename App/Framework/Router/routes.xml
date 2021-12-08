@@ -15,10 +15,10 @@
     <route p="update-user" controller="SecurityController" action="Post" params="id"/>
 
     <!--    Api-->
-    <route p="api" controller="ApiController" action="addPost" methode=""/>
-    <route p="api" controller="ApiController" action="deletePost" methode="post" params="id"/>
-    <route p="api" controller="ApiController" action="updatePost" methode="post"/>
-    <route p="api" controller="ApiController" action="Post" methode="get"/>
+    <route p="api/post" controller="ApiController" action="post" methode="get" params="id,test"/>
+<!--    <route p="api/post" controller="ApiController" action="deletePost" methode="post" params="id"/>-->
+<!--    <route p="api/post" controller="ApiController" action="updatePost" methode="post" params="id"/>-->
+<!--    <route p="api/post" controller="ApiController" action="Post" methode="get"/>-->
 
 
 </routes>

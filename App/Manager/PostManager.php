@@ -17,6 +17,7 @@ class PostManager extends BaseManager
         foreach ($tab as $post) {
             $tab[$i] = new Post($post);
         }
+
         return $tab;
     }
 
@@ -25,9 +26,9 @@ class PostManager extends BaseManager
         $query = $this->db->prepare('SELECT * FROM post WHERE id = :id');
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
         $query->execute();
-        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\Post.php');
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\Post');
 
-        return $query->fetch();
+        return new Post($query->fetch(\PDO::FETCH_ASSOC));
     }
 
     public function deleteById(int $id): bool

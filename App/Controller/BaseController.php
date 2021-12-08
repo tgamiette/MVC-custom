@@ -20,7 +20,7 @@ class BaseController
         if ( !is_callable([$this, $method])) {
             throw new \RuntimeException('L\'action "'.$method.'"n\'est pas définie sur ce module');
         }
-        $this->$method();
+        $this->$method($this->params);
     }
 
     public function render(string $template, array $args, string $title)

@@ -31,7 +31,7 @@ class Router
                         $params[$key] = $_GET[$key];
                     }
                 }
-
+var_dump($action,$params);
                 return new $controllerClass($action, $params);
             }
         }

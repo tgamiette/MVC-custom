@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
     <route p="/" controller="PostController" action="Index"/>
-    <route p="article" controller="PostController" action="Post" params="id,livre,lol"/>
+    <route p="post" controller="PostController" action="Post" params="id"/>
 
     <!--    Administration-->
     <route p="admin" controller="AdminController" action="Post" params="id"/>

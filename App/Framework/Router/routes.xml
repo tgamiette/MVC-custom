@@ -15,4 +15,11 @@
     <route p="signup" controller="SecurityController" action="Post"/>
     <route p="update-user" controller="SecurityController" action="Post" params="id"/>
 
+    <!--    Api-->
+    <route p="api" controller="ApiController" action="addPost" methode=""/>
+    <route p="api" controller="ApiController" action="deletePost" methode="post" params="id"/>
+    <route p="api" controller="ApiController" action="updatePost" methode="post"/>
+    <route p="api" controller="ApiController" action="Post" methode="get"/>
+
+
 </routes>

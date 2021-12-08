@@ -3,13 +3,14 @@
 namespace App\Manager;
 
 session_start();
+use App\Framework\Actions\Password;
 
 class CnxManager extends BaseManager
 {
     public function mailCheck(string $mail)
     {
-        $query= $this->db->query("SELECT id FROM author WHERE email = :email");
-        $query->bindValue(':email', $mail, \PDO::PARAM_STRING);
+        $query= $this->db->query("SELECT id FROM author WHERE mail = :email");
+        $query->bindValue(':email', $mail, \PDO::PARAM_STR);
         $query->execute();
         $data = $query->fetch();
 
@@ -25,8 +26,8 @@ class CnxManager extends BaseManager
             return false;
 
         $id = $this->mailCheck($mail);
-        $query = $this->db->query("SELECT password FROM author WHERE email = :email");
-        $query->bindValue(':email', $mail, \PDO::PARAM_STRING);
+        $query = $this->db->query("SELECT password FROM author WHERE mail = :email");
+        $query->bindValue(':email', $mail, \PDO::PARAM_STR);
         $query->execute();
         $data = $query->fetch();
 

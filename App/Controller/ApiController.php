@@ -17,7 +17,7 @@ class ApiController extends BaseController
             $posts = $postmanager->findAll();
         } else {
             $posts = $postmanager->findById($id);
-//            var_dump($posts);
+//            var_dump($posts);die();
         }
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($posts);

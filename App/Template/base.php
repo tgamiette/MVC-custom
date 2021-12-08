@@ -10,8 +10,8 @@
     <title><?=$title?></title>
 </head>
 <body>
+<?php include "_navbar.php" ?>
 <div class="container">
-
     <?=$body?>
 </div>
 </body>

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Framework\Actions;
+namespace App\Entity;
 
-abstract class AbstractClass
+abstract class BaseEntity
 {
     /**
      * @param array $array

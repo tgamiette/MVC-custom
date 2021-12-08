@@ -14,14 +14,6 @@ class Author extends BaseEntity implements \JsonSerializable
     private int $id;
 
     /**
-     * @param array $array
-     */
-    public function __construct(array $array = [])
-    {
-        $this->hydrate($array);
-    }
-
-    /**
      * @return int
      */
     public function getId(): int
@@ -56,22 +48,6 @@ class Author extends BaseEntity implements \JsonSerializable
     /**
      * @return string
      */
-    public function getMail(): string
-    {
-        return $this->mail;
-    }
-
-    /**
-     * @param string $mail
-     */
-    public function setMail(string $mail): void
-    {
-        $this->mail = $mail;
-    }
-
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
@@ -85,6 +61,14 @@ class Author extends BaseEntity implements \JsonSerializable
         $this->password = $password;
     }
 
+    public function jsonSerialize()
+    {
+        return [
+            "Firsname" => $this->getFirstName(),
+            "LastName" => $this->getLastName(),
+            "email" => $this->getMail(),
+        ];
+    }
 
     /**
      * @return string
@@ -118,12 +102,19 @@ class Author extends BaseEntity implements \JsonSerializable
         $this->lastName = $lastName;
     }
 
-    public function jsonSerialize()
+    /**
+     * @return string
+     */
+    public function getMail(): string
     {
-        return[
-            "Firsname"=>$this->getFirstName(),
-            "LastName"=>$this->getLastName(),
-            "email"=>$this->getMail()
-        ];
+        return $this->mail;
+    }
+
+    /**
+     * @param string $mail
+     */
+    public function setMail(string $mail): void
+    {
+        $this->mail = $mail;
     }
 }

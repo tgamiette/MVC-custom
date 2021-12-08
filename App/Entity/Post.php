@@ -2,32 +2,40 @@
 
 namespace App\Entity;
 
-use App\Framework\Actions\AbstractClass;
+use App\Entity\BaseEntity;
 use App\Manager\AuthorManager;
+use DateTime;
+use Exception;
 
 
-class Post extends AbstractClass implements \JsonSerializable
+class Post extends BaseEntity implements \JsonSerializable
 {
     private int $id;
     private string $content;
     private string $title;
-    private $author;
-    private \DateTime $datePublished;
+    private Author $author;
+    private \DateTime $publishedAt;
 
     /**
-     * @return \DateTime
+     * @return string
      */
-    public function getDatePublished(): \DateTime
+    public function getPublishedAt(): string
     {
-        return $this->datePublished;
+        return $this->publishedAt->format('Y-m-d H:i:s');
     }
 
     /**
-     * @param \DateTime $datePublished
+     * @param string $publishedAt
+     * @throws Exception
      */
-    public function setDatePublished(string $datePublished): void
+    public function setPublishedAt(string $publishedAt): void
     {
-        $this->datePublished = new \DateTime($datePublished);
+        $this->publishedAt = new DateTime($publishedAt);
+    }
+
+    public function setPublishedAtObject(DateTime $publishedAt): void
+    {
+        $this->publishedAt = $publishedAt;
     }
 
     /**
@@ -46,57 +54,30 @@ class Post extends AbstractClass implements \JsonSerializable
         $this->id = $id;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getDateTime(): \DateTime
-    {
-        return $this->dateTime;
-    }
-
-    /**
-     * @param \DateTime $dateTime
-     */
-    public function setDateTime(\DateTime $dateTime): void
-    {
-        $this->dateTime = $dateTime;
-    }
-
     public function jsonSerialize()
     {
         return [
-            'author' => $this->getAuthor(),
             'title' => $this->getTitle(),
             'content' => $this->getContent(),
+            'author' => $this->getAuthor(),
+
         ];
     }
 
     /**
-     * @return int
-     */
-        public function getAuthor()
-    {
-//        var_dump($this->author);die();
-        return $this->author;
-    }
-
-
-    /**
      * @return Author
      */
-    public function getAuthorObjet() :Author
+    public function getAuthor(): Author
     {
-        $authormanager=new AuthorManager();
-        $author= $authormanager->findById($this->getAuthor());
-        return $author;
+        return $this->author;
     }
 
     /**
      * @param Author $author
      */
-    public function setAuthor($author): void
+    public function setAuthor(int $author): void
     {
-        $this->author = $author;
+        $this->author = (new AuthorManager())->findById($author);
     }
 
     /**
@@ -130,4 +111,6 @@ class Post extends AbstractClass implements \JsonSerializable
     {
         $this->content = $content;
     }
+
+
 }

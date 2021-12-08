@@ -1,11 +1,10 @@
-<?php
+<?php   
 
 namespace App\Controller;
 
-class ErrorController extends BaseController {
-
-    public function getNoRoute()
-    {
-        $this->render("404.php",[],"Page non trouvé");
+class ErrorController extends BaseController
+{   
+    public function __construct() {
+        
     }
 }

@@ -5,6 +5,7 @@
 
     <!--    Administration-->
     <route p="admin" controller="AdminController" action="Post" params="id"/>
+    <route p="user-list" controller="AdminController" action="GetAllUsers" params="id"/>
     <route p="delete-comment" controller="AdminController" action="Post" params="id"/>
     <route p="delete-article" controller="AdminController" action="Post" params="id"/>
 

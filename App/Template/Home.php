@@ -1,4 +1,2 @@
 <?php
-
-
-    var_dump($posts);
+    var_dump($args['posts']);

@@ -11,7 +11,6 @@ class PostManager extends BaseManager
     public function findAll(): array
     {
         $query = $this->db->query("SELECT * FROM post");;
-        //        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\Post.php');
         $tab = $query->fetchAll(\PDO::FETCH_ASSOC);
         $result = [];
         foreach ($tab as $post) {

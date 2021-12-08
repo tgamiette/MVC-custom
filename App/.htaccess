@@ -1,20 +1,5 @@
 RewriteEngine on
-#post/{id article}
-RewriteRule ^post/([0-9]+)$ index.php?p=post&id=$1
+#[post]/[idarticle]
+RewriteRule ^api/([a-zA-Z]+)/?([0-9]+)$ index.php?entity=$1&id=$2
+RewriteRule ^([a-z]+)/?([0-9]*)$ index.php?p=$1&id=$2
 
-#Administration
-RewriteRule ^post/([0-9]+)$ index.php?p=delete-comment
-RewriteRule ^post/([0-9]+)$ index.php?p=delete-article
-RewriteRule ^post/([0-9]+)$ index.php?p=post&id=$1
-
-#Security
-RewriteRule ^login$ index.php?p=login
-RewriteRule ^logout$ index.php?p=logout
-RewriteRule ^signup$ index.php?p=signup
-RewriteRule ^update-user/([0-9]+)$ index.php?p=signup&id=$1
-
-#Api
-RewriteRule ^api/author$ index.php?p=login
-#RewriteRule ^api/comment$ index.php?p=logout
-#RewriteRule ^api/post$ index.php?p=signup
-#RewriteRule ^api/([0-9]+)$ index.php?p=signup&id=$1

@@ -2,7 +2,7 @@
 
 namespace App\Framework\Router;
 
-//use Controller\ErrorController; TODO
+use App\Controller\ErrorController;
 
 class Router
 {
@@ -31,10 +31,9 @@ class Router
                         $params[$key] = $_GET[$key];
                     }
                 }
-var_dump($action,$params);
                 return new $controllerClass($action, $params);
             }
         }
-        //return new ErrorController('noRoute'); TODO
+        return new ErrorController('noRoute');
     }
 }

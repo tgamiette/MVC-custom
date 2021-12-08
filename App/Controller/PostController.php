@@ -13,18 +13,17 @@ class PostController extends BaseController
     //    {
     //        parent::__construct($action, $params);
     //    }
-
     /**
      * Show all post
      */
-    public function executeIndex()
+    public function getIndex()
     {
         $postmanager = new PostManager();
         $posts = $postmanager->findAll();
         $this->render('Home.php', ['posts' => $posts], "Les posts");
     }
 
-    public function executePost(int $post_id)
+    public function getPost(int $post_id)
     {
         $postmanager = new PostManager();
         $post = $postmanager->findById($post_id);

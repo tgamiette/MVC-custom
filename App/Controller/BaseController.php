@@ -29,12 +29,12 @@ abstract class BaseController
         $this->$method($this->params[0]);
     }
 
-    public function render(string $template, $args=[], string $title)
+    public function render(string $template, array $args, string $title)
     {
         $view = $this->viewDIR.$template;
         
         foreach ($args as $key => $value) {
-            $key = $value;
+            ${$key} = $value;
         }
     
         ob_start();

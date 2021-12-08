@@ -29,7 +29,7 @@ class PostController extends BaseController
             $this->render('404.php', ['msg' => "Il manque l'id dans l'url peut être"], "Page non trouvé");
         } else {
             $postmanager = new PostManager();
-            $post = $postmanager->findById(12);
+            $post = $postmanager->findById(1);
             $this->render('Show.php', ['post' => $post], $post->getTitle());
         }
     }

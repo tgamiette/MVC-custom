@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Framework\Database\PDOFactory;
 use App\Manager\PostManager;
 
 class PostController extends BaseController
@@ -20,7 +21,7 @@ class PostController extends BaseController
     {
         $postmanager = new PostManager();
         $posts = $postmanager->findAll();
-        $this->render('Home.php', $posts, "Les posts");
+        $this->render('Home.php', ['posts' => $posts], "Les posts");
     }
 
     public function executePost(int $post_id)
@@ -28,7 +29,7 @@ class PostController extends BaseController
         $postmanager = new PostManager();
         $post = $postmanager->findById($post_id);
 
-        $this->render('Show.php', $post, $posts->getTitle());
+        $this->render('Show.php', $post, $post->getTitle());
     }
 
 }

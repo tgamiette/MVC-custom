@@ -9,18 +9,9 @@ class Post extends AbstractClass
     private int $id;
     private string $content;
     private string $title;
-    private Author $author;
+    private $author;
     private \DateTime $datePublished;
 
-    /**
-     * @param array $array
-     */
-    public function __construct(array $array)
-    {
-        if (empty($array)) {
-            $this->hydrate($array);
-        }
-    }
 
     /**
      * @return string
@@ -65,9 +56,9 @@ class Post extends AbstractClass
     /**
      * @param \DateTime $datePublished
      */
-    public function setDatePublished(\DateTime $datePublished): void
+    public function setDatePublished( string $datePublished): void
     {
-        $this->datePublished = $datePublished;
+        $this->datePublished = new \DateTime($datePublished);
     }
 
     /**
@@ -114,7 +105,7 @@ class Post extends AbstractClass
     /**
      * @param Author $author
      */
-    public function setAuthor(Author $author): void
+    public function setAuthor($author): void
     {
         $this->author = $author;
     }

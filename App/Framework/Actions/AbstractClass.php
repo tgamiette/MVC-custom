@@ -4,6 +4,14 @@ namespace App\Framework\Actions;
 
 abstract class AbstractClass
 {
+    /**
+     * @param array $array
+     */
+    public function __construct(array $array = [])
+    {
+        $this->hydrate($array);
+    }
+    
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {

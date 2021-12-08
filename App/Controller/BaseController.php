@@ -29,7 +29,7 @@ abstract class BaseController
         $this->$method($this->params[0]);
     }
 
-    public function render(string $template, $args, string $title)
+    public function render(string $template, $args=[], string $title)
     {
         $view = $this->viewDIR.$template;
         

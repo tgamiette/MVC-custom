@@ -20,12 +20,11 @@ class PostManager extends BaseManager
         return $result;
     }
 
-    public function findById(int $id): Post
+    public function findById(int $id)
     {
         $query = $this->db->prepare('SELECT * FROM post WHERE id = :id');
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
         $query->execute();
-        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\Post');
 
         return new Post($query->fetch(\PDO::FETCH_ASSOC));
     }

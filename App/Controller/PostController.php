@@ -23,11 +23,15 @@ class PostController extends BaseController
         $this->render('Home.php', ['posts' => $posts], "Les posts");
     }
 
-    public function getPost(int $post_id)
+    public function getPost($post_id)
     {
-        $postmanager = new PostManager();
-        $post = $postmanager->findById($post_id);
-        $this->render('Show.php', ['post' => $post], $post->getTitle());
+        if (empty($post_id)) {
+            $this->render('404.php', ['msg' => "Il manque l'id dans l'url peut être"], "Page non trouvé");
+        } else {
+            $postmanager = new PostManager();
+            $post = $postmanager->findById(12);
+            $this->render('Show.php', ['post' => $post], $post->getTitle());
+        }
     }
 
 }

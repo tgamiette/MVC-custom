@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-class BaseController
+abstract class BaseController
 {
     protected array $params;
     protected string $templateFile = __DIR__."./../Template/base.php";
@@ -14,21 +14,29 @@ class BaseController
      */
     public function __construct(string $action, array $params = [])
     {
-        $this->params = $params;
+        if ($params) { 
+            foreach ($params as $param) {
+                $this->params[] = $param;
+            }
+        }
+        else 
+            $this->params = $params;
 
         $method = 'execute'.ucfirst($action);
         if ( !is_callable([$this, $method])) {
             throw new \RuntimeException('L\'action "'.$method.'"n\'est pas définie sur ce module');
         }
-        $this->$method($this->params);
+        $this->$method($this->params[0]);
     }
 
     public function render(string $template, array $args, string $title)
     {
         $view = $this->viewDIR.$template;
-                foreach ($args as $key => $value) {
-                    $key = $value;
-                }
+        
+        foreach ($args as $key => $value) {
+            $key = $value;
+        }
+    
         ob_start();
         require $view;
         $body = ob_get_clean();

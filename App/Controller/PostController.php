@@ -28,8 +28,7 @@ class PostController extends BaseController
     {
         $postmanager = new PostManager();
         $post = $postmanager->findById($post_id);
-
-        $this->render('Show.php', $post, $post->getTitle());
+        $this->render('Show.php', ['post' => $post], $post->getTitle());
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace App\Framework\Router;
 
-//use Controller\ErrorController; TODO
+use App\Controller\ErrorController;
 
 class Router
 {
@@ -11,7 +11,6 @@ class Router
         $xml = new \DOMDocument();
         $xml->load(__DIR__.'/routes.xml');
         $routes = $xml->getElementsByTagName('route');
-
 
         if (isset($_GET['p'])) {
             $path = htmlspecialchars($_GET['p']);
@@ -28,13 +27,13 @@ class Router
                 if ($route->hasAttribute('params')) {
                     $keys = explode(',', $route->getAttribute('params'));
                     foreach ($keys as $key) {
-                        $params[$key] = $_GET[$key];
+                        $params[$key] = $_GET['params'];
                     }
                 }
-var_dump($action,$params);
                 return new $controllerClass($action, $params);
             }
         }
-        //return new ErrorController('noRoute'); TODO
+        $error = new ErrorController();
+        $error->render('404Error.php', [], '404 Error');
     }
 }

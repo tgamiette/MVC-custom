@@ -24,9 +24,12 @@ class PostManager extends BaseManager
     {
         $query = $this->db->prepare('SELECT * FROM post WHERE id = :id');
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
-        $query->execute();
 
-        return new Post($query->fetch(\PDO::FETCH_ASSOC));
+        $query->execute();
+        if ($query->fetch(\PDO::FETCH_ASSOC)) {
+            return new Post($query->fetch(\PDO::FETCH_ASSOC));
+        }
+        return array();
     }
 
     public function deleteById(int $id): bool

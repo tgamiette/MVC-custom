@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use App\Framework\Actions\AbstractClass;
+use App\Entity\BaseEntity;
 
-class Author extends AbstractClass
+class Author extends BaseEntity implements \JsonSerializable
 {
     private string $firstName;
     private string $lastName;
@@ -16,11 +16,9 @@ class Author extends AbstractClass
     /**
      * @param array $array
      */
-    public function __construct(array $array)
+    public function __construct(array $array = [])
     {
-        if (empty($array)) {
-            $this->hydrate($array);
-        }
+        $this->hydrate($array);
     }
 
     /**
@@ -118,5 +116,14 @@ class Author extends AbstractClass
     public function setLastName(string $lastName): void
     {
         $this->lastName = $lastName;
+    }
+
+    public function jsonSerialize()
+    {
+        return[
+            "Firsname"=>$this->getFirstName(),
+            "LastName"=>$this->getLastName(),
+            "email"=>$this->getMail()
+        ];
     }
 }

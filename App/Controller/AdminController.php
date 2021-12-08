@@ -7,7 +7,7 @@ use App\Manager\AuthorManager;
 
 class AdminController extends BaseController
 {
-    public function executeGetAllUsers()
+    public function getAllUsers()
     {
 
         $authorManager = new AuthorManager();

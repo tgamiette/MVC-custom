@@ -22,7 +22,7 @@ abstract class BaseController
             $this->params = $params;
         }
 
-        $method = $method.ucfirst($action);
+        $method = strtolower($method).ucfirst($action);
         if ( !is_callable([$this, $method])) {
             throw new \RuntimeException('L\'action "'.$method.'"n\'est pas définie sur ce module');
         }

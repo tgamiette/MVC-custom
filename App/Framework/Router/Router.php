@@ -31,7 +31,7 @@ class Router
                     }
                 }
 
-                return new $controllerClass($action, $params);
+                return new $controllerClass($action, $params, $_SERVER['REQUEST_METHOD']);
             }
         }
 

@@ -13,24 +13,7 @@ class Comment extends BaseEntity implements \JsonSerializable
     private Author $author;
     private string $content;
     private DateTime $publishedAt;
-    private Post $post;
-
-    /**
-     * @return string
-     */
-    public function getPublishedAt(): string
-    {
-        return $this->publishedAt->format('Y-m-d H:i:s');
-    }
-
-    /**
-     * @param string $date_published
-     * @throws Exception
-     */
-    public function setPublishedAt(string $date_published): void
-    {
-        $this->publishedAt = new DateTime($date_published);
-    }
+    private $post;
 
     /**
      * @return DateTime
@@ -38,22 +21,6 @@ class Comment extends BaseEntity implements \JsonSerializable
     public function getPublishedAtObject(): DateTime
     {
         return $this->publishedAt;
-    }
-
-    /**
-     * @return Post
-     */
-    public function getPost(): Post
-    {
-        return $this->post;
-    }
-
-    /**
-     * @param int $post
-     */
-    public function setPost(int $post): void
-    {
-        $this->post = (new PostManager())->findById($post);
     }
 
     /**
@@ -70,6 +37,17 @@ class Comment extends BaseEntity implements \JsonSerializable
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'commentAuthor' => $this->getAuthor(),
+            'post' => $this->getPost(),
+            'content' => $this->getContent(),
+            'publishedAt' => $this->getPublishedAt(),
+
+        ];
     }
 
     /**
@@ -89,9 +67,27 @@ class Comment extends BaseEntity implements \JsonSerializable
     }
 
     /**
+     * @return Post
+     */
+    public function getPost()
+    {
+        return $this->post;
+    }
+
+    /**
+     * @param int $post
+     */
+    public function setPost(int $post)
+    {
+        return (new PostManager())->findById($post);
+    }
+
+
+    /**
      * @return string
      */
-    public function getContent(): string
+    public
+    function getContent(): string
     {
         return $this->content;
     }
@@ -99,20 +95,28 @@ class Comment extends BaseEntity implements \JsonSerializable
     /**
      * @param string $content
      */
-    public function setContent(string $content): void
+    public
+    function setContent(string $content): void
     {
         $this->content = $content;
     }
 
-
-    public function jsonSerialize(): array
+    /**
+     * @return string
+     */
+    public
+    function getPublishedAt(): string
     {
-        return [
-            'commentAuthor' => $this->getAuthor(),
-            'post'=>$this->getPost(),
-            'content' => $this->getContent(),
-            'publishedAt' => $this->getPublishedAt(),
+        return $this->publishedAt->format('Y-m-d H:i:s');
+    }
 
-        ];
+    /**
+     * @param string $date_published
+     * @throws Exception
+     */
+    public
+    function setPublishedAt(string $date_published): void
+    {
+        $this->publishedAt = new DateTime($date_published);
     }
 }

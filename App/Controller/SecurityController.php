@@ -19,16 +19,22 @@ class SecurityController extends BaseController {
     }
 
 
-    public function getCheckCnx(array $params) {
 
-        $mail = $params['mail'];
-        $pwd = $params['pwd'];
-        $cnxManager = new CnxManager();
-        if ($cnxManager->passwordCheck($pwd, $mail)) {
-            $postController = new PostController('Index', []);
+    public function postIsSessionActive(array $params) {
+
+        $mail = $_POST['mail'];
+        $pwd = $_POST['pwd'];
+//        var_dump($_POST);
+        if ( isset($pwd) && isset($mail)) {
+            $cnxManager = new CnxManager();
+            if ($cnxManager->passwordCheck($pwd, $mail)) {
+                header('Location: /');
+                return new PostController('Index', []);
+            } else {
+                header('Location: singin');
+//                return new SecurityController('IsSessionActive');
+            }
         }
-        else
-            $this->render('SingIn.php', [], 'Connexion');
     }
     
 

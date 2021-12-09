@@ -1,5 +1,5 @@
-#RewriteEngine on
-#[post]/[idarticle]
-#RewriteRule ^api/([a-zA-Z]+)/?([0-9]*)$ index.php?p=api/$1&id=$2 [NC]
-#RewriteRule ^([a-z]+)/?([0-9]*)$ index.php?p=$1&id=$2
+RewriteEngine on
+
+RewriteRule ^api/([a-zA-Z]+)/?([0-9]*)$ index.php?p=api/$1&id=$2 [NC]
+RewriteRule ^([a-z]+)/?([0-9]*)$ index.php?p=$1&id=$2
 

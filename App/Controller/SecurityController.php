@@ -6,43 +6,44 @@ use App\Framework\Session\Session;
 use App\Manager\AuthorManager;
 use App\Controller\PostController;
 
-class SecurityController extends BaseController {
+class SecurityController extends BaseController
+{
 
-    public function getCheckCnx() {
-
+    public function getCheckCnx()
+    {
         $session = new Session();
         if ($session->get('id')) {
-            return $postController = new PostController('Index', []);
-        }
-        else
+            header('Location: /');
+        } else {
             $this->render('SingIn.php', [], 'Connexion');
+        }
     }
 
 
-    public function postCheckCnx() {
-
+    public function postCheckCnx()
+    {
         $mail = $_POST['mail'];
         $pwd = $_POST['pwd'];
-//        var_dump($_POST);
-        if ( isset($pwd) && isset($mail)) {
+        if (isset($pwd) && isset($mail)) {
             $authorManager = new AuthorManager();
             if ($authorManager->passwordCheck($pwd, $mail)) {
+                //                Manque pas le passage des identfiant de l'utilisateur dans la session ?'
                 header('Location: /');
-                return new PostController('Index', []);
+                //                return new PostController('Index', []);
             } else {
-                header('Location: singin');
-//                return new SecurityController('IsSessionActive');
+                header('Location: /singin');
             }
         }
     }
 
-    public function getLogout() {
+    public function getLogout()
+    {
         $session = new Session();
         if ($session->get('id')) {
             $session->delete('id');
         }
-        return new PostController('Index', []);
+        header('Location: /');
     }
-    
+
 
 }

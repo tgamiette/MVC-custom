@@ -35,6 +35,6 @@ class Router
             }
         }
 
-        return new ErrorController('noRoute');
+        return new ErrorController('NoRoute');
     }
 }

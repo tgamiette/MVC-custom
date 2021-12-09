@@ -2,48 +2,42 @@
 
 namespace App\Entity;
 
-use App\Framework\Actions\AbstractClass;
+use App\Manager\AuthorManager;
+use App\Manager\PostManager;
+use DateTime;
+use Exception;
 
-class Comment extends AbstractClass
+class Comment extends BaseEntity implements \JsonSerializable
 {
     private int $id;
     private Author $author;
     private string $content;
-    private \DateTime $datePublished;
+    private DateTime $publishedAt;
     private Post $post;
-
-    /**
-     * @param array $array
-     */
-    public function __construct(array $array)
-    {
-        if (empty($array)) {
-            $this->hydrate($array);
-        }
-    }
 
     /**
      * @return string
      */
-    public function getDatePublished(): string
+    public function getPublishedAt(): string
     {
-        return $this->datePublished->format('Y-m-d H:i:s');
+        return $this->publishedAt->format('Y-m-d H:i:s');
     }
 
     /**
-     * @param \DateTime $date_published
+     * @param string $date_published
+     * @throws Exception
      */
-    public function setDatePublished(\DateTime $date_published): void
+    public function setPublishedAt(string $date_published): void
     {
-        $this->date_published = $date_published;
+        $this->publishedAt = new DateTime($date_published);
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getDatePublishedObject(): \DateTime
+    public function getPublishedAtObject(): DateTime
     {
-        return $this->date_published;
+        return $this->publishedAt;
     }
 
     /**
@@ -55,11 +49,11 @@ class Comment extends AbstractClass
     }
 
     /**
-     * @param Post $post
+     * @param int $post
      */
-    public function setPost(Post $post): void
+    public function setPost(int $post): void
     {
-        $this->post = $post;
+        $this->post = (new PostManager())->findById($post);
     }
 
     /**
@@ -87,11 +81,11 @@ class Comment extends AbstractClass
     }
 
     /**
-     * @param Author $author
+     * @param int $author
      */
-    public function setAuthor(Author $author): void
+    public function setAuthor(int $author): void
     {
-        $this->author = $author;
+        $this->author = (new AuthorManager())->findById($author);
     }
 
     /**
@@ -111,4 +105,14 @@ class Comment extends AbstractClass
     }
 
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'commentAuthor' => $this->getAuthor(),
+            'post'=>$this->getPost(),
+            'content' => $this->getContent(),
+            'publishedAt' => $this->getPublishedAt(),
+
+        ];
+    }
 }

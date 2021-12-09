@@ -8,4 +8,4 @@ CREATE TABLE `projet`.`comment`
 ) ENGINE = InnoDB;
 
 ALTER TABLE projet.comment
-    ADD `post_id` INT NOT NULL AFTER `date_published`;
+    ADD `post_id` INT NOT NULL AFTER publishedAt;

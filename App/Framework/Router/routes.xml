@@ -5,6 +5,7 @@
 
     <!--    Administration-->
     <route p="admin" controller="AdminController" action="Post" params="id"/>
+    <route p="user-list" controller="AdminController" action="GetAllUsers" params="id"/>
     <route p="delete-comment" controller="AdminController" action="Post" params="id"/>
     <route p="delete-article" controller="AdminController" action="Post" params="id"/>
 
@@ -15,10 +16,11 @@
     <route p="update-user" controller="SecurityController" action="Post" params="id"/>
 
     <!--    Api-->
-    <route p="api" controller="ApiController" action="addPost" methode=""/>
-    <route p="api" controller="ApiController" action="deletePost" methode="post" params="id"/>
-    <route p="api" controller="ApiController" action="updatePost" methode="post"/>
-    <route p="api" controller="ApiController" action="Post" methode="get"/>
+    <route p="api/post" controller="ApiController" action="post"  params="id"/>
+    <route p="api/comment" controller="ApiController" action="comment"  params="id"/>
+<!--    <route p="api/post" controller="ApiController" action="deletePost" methode="post" params="id"/>-->
+<!--    <route p="api/post" controller="ApiController" action="updatePost" methode="post" params="id"/>-->
+<!--    <route p="api/post" controller="ApiController" action="Post" methode="get"/>-->
 
 
 </routes>

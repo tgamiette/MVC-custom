@@ -11,8 +11,13 @@ class  CommentManager extends BaseManager
     {
         $query = $this->db->query("SELECT * FROM comment");;
         // TODO voir avec le PROF
-        //        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\comment.php');
-        return $query->fetchAll(\PDO::FETCH_ASSOC);
+        $comments = $query->fetchAll(\PDO::FETCH_ASSOC);
+        $result = [];
+        foreach ($comments as $comment) {
+            $result[] = new Comment($comment);
+        }
+
+        return $result;
     }
 
     public function findById(int $id): Comment
@@ -22,7 +27,7 @@ class  CommentManager extends BaseManager
         $query->execute();
         $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\Comment.php');
 
-        return $query->fetch();
+        return new Comment($query->fetch());
     }
 
     public function deleteById(int $id): void
@@ -32,13 +37,25 @@ class  CommentManager extends BaseManager
         $query->execute();
     }
 
-    public function add(comment $comment): void
+    public function add(Comment $comment): void
     {
-        $sql = "INSERT INTO comment (`author_id`, `content`, `date_published`, `post_id`) VALUES (:author_id, :content, :date_published, :post_id);";
+        $sql = "INSERT INTO comment (author, `content`, publishedAt, post) VALUES (:author_id, :content, :date_published, :post_id);";
         $request = $this->db->prepare($sql);
         $request->bindValue(':author_id', $comment->getAuthor()->getId(), \PDO::PARAM_INT);
         $request->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
-        $request->bindValue(':date_published', $comment->getDatePublished(), \PDO::PARAM_STR);
+        $request->bindValue(':date_published', $comment->getPublishedAt(), \PDO::PARAM_STR);
+        $request->bindValue(':post_id', $comment->getPost()->getId(), \PDO::PARAM_INT);
+
+        $request->execute();
+    }
+
+    public function update(Comment $comment): void
+    {
+        $sql = "INSERT INTO comment (author, `content`, publishedAt, post) VALUES (:author_id, :content, :date_published, :post_id);";
+        $request = $this->db->prepare($sql);
+        $request->bindValue(':author_id', $comment->getAuthor()->getId(), \PDO::PARAM_INT);
+        $request->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
+        $request->bindValue(':date_published', $comment->getPublishedAt(), \PDO::PARAM_STR);
         $request->bindValue(':post_id', $comment->getPost()->getId(), \PDO::PARAM_INT);
 
         $request->execute();

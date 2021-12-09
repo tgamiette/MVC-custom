@@ -1,2 +1,5 @@
+<pre
 <?php
-    var_dump($args['posts']);
+
+//var_dump($args);
+var_dump($post);

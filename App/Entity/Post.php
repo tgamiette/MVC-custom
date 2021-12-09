@@ -2,31 +2,82 @@
 
 namespace App\Entity;
 
-use App\Framework\Actions\AbstractClass;
+use App\Entity\BaseEntity;
+use App\Manager\AuthorManager;
+use DateTime;
+use Exception;
 
-class Post extends AbstractClass
+
+class Post extends BaseEntity implements \JsonSerializable
 {
     private int $id;
     private string $content;
     private string $title;
-    private $author;
-    private \DateTime $datePublished;
-
+    private Author $author;
+    private \DateTime $publishedAt;
 
     /**
      * @return string
      */
-    public function getContent(): string
+    public function getPublishedAt(): string
     {
-        return $this->content;
+        return $this->publishedAt->format('Y-m-d H:i:s');
     }
 
     /**
-     * @param string $content
+     * @param string $publishedAt
+     * @throws Exception
      */
-    public function setContent(string $content): void
+    public function setPublishedAt(string $publishedAt): void
     {
-        $this->content = $content;
+        $this->publishedAt = new DateTime($publishedAt);
+    }
+
+    public function setPublishedAtObject(DateTime $publishedAt): void
+    {
+        $this->publishedAt = $publishedAt;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'title' => $this->getTitle(),
+            'content' => $this->getContent(),
+            'author' => $this->getAuthor(),
+
+        ];
+    }
+
+    /**
+     * @return Author
+     */
+    public function getAuthor(): Author
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param Author $author
+     */
+    public function setAuthor(int $author): void
+    {
+        $this->author = (new AuthorManager())->findById($author);
     }
 
     /**
@@ -46,67 +97,20 @@ class Post extends AbstractClass
     }
 
     /**
-     * @return \DateTime
+     * @return string
      */
-    public function getDatePublished(): \DateTime
+    public function getContent(): string
     {
-        return $this->datePublished;
+        return $this->content;
     }
 
     /**
-     * @param \DateTime $datePublished
+     * @param string $content
      */
-    public function setDatePublished( string $datePublished): void
+    public function setContent(string $content): void
     {
-        $this->datePublished = new \DateTime($datePublished);
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDateTime(): \DateTime
-    {
-        return $this->dateTime;
-    }
-
-    /**
-     * @param \DateTime $dateTime
-     */
-    public function setDateTime(\DateTime $dateTime): void
-    {
-        $this->dateTime = $dateTime;
-    }
-
-    /**
-     * @return Author
-     */
-    public function getAuthor(): Author
-    {
-        return $this->author;
+        $this->content = $content;
     }
 
 
-    /**
-     * @param Author $author
-     */
-    public function setAuthor($author): void
-    {
-        $this->author = $author;
-    }
 }

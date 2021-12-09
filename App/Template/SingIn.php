@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -12,13 +10,14 @@
     </head>
 
     <body>
-        <form action="connexiontraitement.php" method="post" class="container w-25 shadow my-5 ">
+        <form action="?p=login" method="get" class="container w-25 shadow my-5 ">
             <h2 class="text-center">Connexion</h2>
+            <input style="display:none" name="p" value="login" />
             <div class="form-group">
-                <input type="email" name="email" class="form-control" placeholder="Email" required="required"autocomplete="off">
+                <input type="email" name="mail" class="form-control" placeholder="Email" required="required"autocomplete="off">
             </div>
             <div class="form-group">
-                <input type="password" name="password" class="form-control" placeholder="Mot de passe" required="required" autocomplete="off">
+                <input type="password" name="pwd" class="form-control" placeholder="Mot de passe" required="required" autocomplete="off">
             </div>
             <div class="form-group text-center mt-2">
                 <button type="submit" class="btn btn-success btn-block">Connexion</button>

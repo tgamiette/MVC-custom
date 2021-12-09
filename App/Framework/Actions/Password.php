@@ -11,6 +11,10 @@ class Password
 
     public function isValidPassword($password,$hash)
     {
-        return password_verify($password,$hash);
+        if ($password == $hash)
+            return true;
+        else   
+            return false;
+        //return password_verify($password,$hash); HASHER LES MDP EN BASE DE DONNÉE AVANT D'UTILISER CETTE LIGNE
     }
 }

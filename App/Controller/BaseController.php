@@ -14,18 +14,13 @@ abstract class BaseController
      */
     public function __construct(string $action, array $params = [], $method = "get")
     {
-        if ($params) {
-            foreach ($params as $key => $value) {
-                $this->params[$key] = $value;
-            }
-        } else {
-            $this->params = $params;
-        }
-
+        
+        $this->params = $params;
         $method = strtolower($method).ucfirst($action);
         if ( !is_callable([$this, $method])) {
             throw new \RuntimeException('L\'action "'.$method.'"n\'est pas définie sur ce module');
         }
+
         $this->$method($this->params);
     }
 

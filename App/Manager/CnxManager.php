@@ -4,19 +4,21 @@ namespace App\Manager;
 
 session_start();
 use App\Framework\Actions\Password;
+use App\Framework\Session\Session;
 
 class CnxManager extends BaseManager
 {
     public function mailCheck(string $mail)
     {
-        $query= $this->db->query("SELECT id FROM author WHERE mail = :email");
-        $query->bindValue(':email', $mail, \PDO::PARAM_STR);
+        $query= $this->db->prepare("SELECT id FROM author WHERE email = :mail");
+        $query->bindValue(':mail', $mail, \PDO::PARAM_STR);
         $query->execute();
         $data = $query->fetch();
-
+        
         if ($data){
-            return $data;
+            return $data['id'];
         }
+        
         return false;
     }
 
@@ -24,16 +26,15 @@ class CnxManager extends BaseManager
     {
         if(!$this->mailCheck($mail))
             return false;
-
         $id = $this->mailCheck($mail);
-        $query = $this->db->query("SELECT password FROM author WHERE mail = :email");
-        $query->bindValue(':email', $mail, \PDO::PARAM_STR);
+        $query = $this->db->prepare("SELECT password FROM author WHERE email = :mail");
+        $query->bindValue(':mail', $mail, \PDO::PARAM_STR);
         $query->execute();
         $data = $query->fetch();
-
-        $password = new Password();
-        if($password->isValidPassword($password, $data)){
-            $_SESSION['author'] = $id;
+        $passwordCheck = new Password();
+        if($passwordCheck->isValidPassword($password, $data['password'])){
+            $session = new Session;
+            $session->set('author', $id);
             return true;
         }
         else

@@ -1,4 +1,4 @@
 <?php
 
 
-    var_dump($args['post']);
+    var_dump($args);

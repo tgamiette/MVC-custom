@@ -13,7 +13,10 @@
 <body>
 <form action="connexiontraitement.php" method="post" class="container w-25 shadow my-5">
     <h2 class="text-center">Inscription</h2>
-    <div class="form-group">
+    <div class="form-group mt-2">
+        <input type="text" name="name" class="form-control" placeholder="Nom" required="required" autocomplete="off">
+    </div>
+    <div class="form-group mt-2">
         <input type="email" name="email" class="form-control" placeholder="Email" required="required"autocomplete="off">
     </div>
     <div class="form-group mt-2">

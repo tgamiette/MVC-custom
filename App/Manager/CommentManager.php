@@ -10,7 +10,6 @@ class  CommentManager extends BaseManager
     public function findAll(): array
     {
         $query = $this->db->query("SELECT * FROM comment");;
-        // TODO voir avec le PROF
         $comments = $query->fetchAll(\PDO::FETCH_ASSOC);
         $result = [];
         foreach ($comments as $comment) {
@@ -30,14 +29,14 @@ class  CommentManager extends BaseManager
         return new Comment($query->fetch());
     }
 
-    public function deleteById(int $id): void
+    public function deleteById(int $id): bool
     {
         $query = $this->db->prepare('DELETE FROM comment WHERE id = :id');
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
-        $query->execute();
+        return $query->execute();
     }
 
-    public function add(Comment $comment): void
+    public function add(Comment $comment): bool
     {
         $sql = "INSERT INTO comment (author, `content`, publishedAt, post) VALUES (:author_id, :content, :date_published, :post_id);";
         $request = $this->db->prepare($sql);
@@ -46,19 +45,45 @@ class  CommentManager extends BaseManager
         $request->bindValue(':date_published', $comment->getPublishedAt(), \PDO::PARAM_STR);
         $request->bindValue(':post_id', $comment->getPost()->getId(), \PDO::PARAM_INT);
 
-        $request->execute();
+        return $request->execute();
+    }
+    //
+    //    public function update(Comment $comment): bool
+    //    {
+    //        $sql = "INSERT INTO comment (author, `content`, publishedAt, post) VALUES (:author_id, :content, :date_published, :post_id);";
+    //        $request = $this->db->prepare($sql);
+    //        $request->bindValue(':author_id', $comment->getAuthor()->getId(), \PDO::PARAM_INT);
+    //        $request->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
+    //        $request->bindValue(':date_published', $comment->getPublishedAt(), \PDO::PARAM_STR);
+    //        $request->bindValue(':post_id', $comment->getPost()->getId(), \PDO::PARAM_INT);
+    //
+    //        return $request->execute();
+    //    }
+
+    public function deleteByPostId(int $id): bool
+    {
+        $query = $this->db->prepare('DELETE FROM comment WHERE post = :id');
+        $query->bindValue(':id', $id, \PDO::PARAM_INT);
+
+        return $query->execute();
     }
 
-    public function update(Comment $comment): void
+    public function updatebyId(int $id, comment $comment)
     {
-        $sql = "INSERT INTO comment (author, `content`, publishedAt, post) VALUES (:author_id, :content, :date_published, :post_id);";
+        $sql = "UPDATE `comment` SET `author` = ':author_id',
+                                    `content` = ':content',
+                                    `publishedAt`= ':date_published',
+                                     `post` = ':post_id'
+                        WHERE `comment`.`id` = ':id';";
+
         $request = $this->db->prepare($sql);
         $request->bindValue(':author_id', $comment->getAuthor()->getId(), \PDO::PARAM_INT);
         $request->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
         $request->bindValue(':date_published', $comment->getPublishedAt(), \PDO::PARAM_STR);
         $request->bindValue(':post_id', $comment->getPost()->getId(), \PDO::PARAM_INT);
+        $request->bindValue(':id', $id, \PDO::PARAM_INT);
 
-        $request->execute();
+        return $request->execute();
     }
 
 }

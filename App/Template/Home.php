@@ -2,4 +2,4 @@
 <?php
 
 //var_dump($args);
-var_dump($post);
+var_dump($posts);

@@ -3,6 +3,7 @@
 namespace App\Manager;
 
 
+use App\Entity\Comment;
 use App\Entity\Post;
 
 class PostManager extends BaseManager
@@ -50,6 +51,24 @@ class PostManager extends BaseManager
         $request->bindValue(':date_published', $post->getPublishedAt(), \PDO::PARAM_STR);
 
         return $request->execute();
+    }
+
+    public function update(int $id,Post $post): bool
+    {
+        $sql = "UPDATE `post` SET `title` = ':title',
+                                    `content` = ':content',
+                                    `author`= ':author',
+                                     `publishedAt` = ':date_published'
+                        WHERE `post`.`id` = ':id';";
+
+        $request = $this->db->prepare($sql);
+        $request->bindValue(':title', $post->getTitle()->getId(), \PDO::PARAM_INT);
+        $request->bindValue(':content', $post->getContent(), \PDO::PARAM_STR);
+        $request->bindValue(':author', $post->getAuthor()->getId(), \PDO::PARAM_STR);
+        $request->bindValue(':date_published', $post->getPublishedAt(), \PDO::PARAM_INT);
+
+        return $request->execute();
+
     }
 
 }

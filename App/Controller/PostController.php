@@ -19,7 +19,6 @@ class PostController extends BaseController
 
     public function getPost($post_id)
     {
-
         if (empty($post_id)) {
             $this->render('404.php', ['msg' => "Il manque l'id dans l'url peut être"], "Page non trouvé");
         } else {

@@ -73,13 +73,10 @@ class ApiController extends BaseController
 
     public function postComment($params)
     {
-        //var_dump($_POST);
-        $comment = new CommentManager();
-        $id = (int)$params['id'];
+        $comment = new Comment($_POST);
         $Commentmanager = new CommentManager();
         $result = $Commentmanager->add($comment);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($result);
+        $this->renderJSON($result);
     }
 
 
@@ -92,20 +89,41 @@ class ApiController extends BaseController
         echo json_encode("test");
     }
 
+    //Doit changer tout les paramètres
+    public function putComment($params)
+    {
+        parse_str(file_get_contents("php://input"), $_PUT);
+        $id = (int)$params['id'];
+        $commentmanager = new CommentManager();
 
-    public function updateComment($params)
+        if ($id == 0 || empty($_PUT['author']) || empty($_PUT['content']) || empty($_PUT['publishedAt']) || empty($_PUT['post'])) {
+            $this->renderJSON("il manque l'id  ou  des paramètres");
+        } else {
+            $Comment = $commentmanager->findById($id);
+            $Comment->setPost($_PUT['post']);
+            $Comment->setAuthor($_PUT['author']);
+            $Comment->setContent($_PUT['content']);
+            $Comment->setPublishedAt($_PUT['publishedAt']);
+
+            $result = $commentmanager->update($Comment);
+            if ($result) {
+                $this->renderJSON("Mise a jour Ok");
+            } else {
+                $this->renderJSON("Mise a jour KOOOOOO");
+            }
+        }
+    }
+
+
+    //    Doit changer les paramètre qu'on lui donne uniquement '
+    public function patchComment($params)
     {
         $id = (int)$params['id'];
         $Comment = new Comment($_POST);
         $commentmanager = new CommentManager();
         $result = $commentmanager->updatebyId($id, $Comment);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($result);
+        $this->renderJSON($result);
     }
 
-    private function renderJSON(bool $result)
-    {
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode("test");
-    }
+
 }

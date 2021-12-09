@@ -79,7 +79,7 @@ class Comment extends BaseEntity implements \JsonSerializable
      */
     public function setPost(int $post)
     {
-        return (new PostManager())->findById($post);
+        $this->post = (new PostManager())->findById($post);
     }
 
 

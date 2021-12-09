@@ -41,4 +41,10 @@ abstract class BaseController
         require $this->templateFile;
         exit;
     }
+
+    public function renderJSON( $result)
+    {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($result);
+    }
 }

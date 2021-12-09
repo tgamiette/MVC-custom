@@ -10,7 +10,8 @@
     <route p="delete-article" controller="AdminController" action="Post" params="id"/>
 
     <!--    Security-->
-    <route p="login" controller="SecurityController" action="Post"/>
+    <route p="singin" controller="SecurityController" action="isSessionActive"/>
+    <route p="login" controller="SecurityController" action="checkCnx" params="mail,pwd"/>
     <route p="logout" controller="SecurityController" action="Post"/>
     <route p="signup" controller="SecurityController" action="Post"/>
     <route p="update-user" controller="SecurityController" action="Post" params="id"/>

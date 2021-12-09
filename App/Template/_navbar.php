@@ -8,7 +8,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="?p=singin">Login dropdown</a>
+            <a class="navbar-brand" href="?p=singin">Login</a>
+            <a class="navbar-brand" href="?p=logout">Logout</a>
+
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

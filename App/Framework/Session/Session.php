@@ -7,9 +7,10 @@ class Session
     public function get(string $key, $default = null)
     {
         $this->started();
+        var_dump($_SESSION['id']);
         if (array_key_exists($key, $_SESSION)) {
             return $_SESSION[$key];
-        }
+        }return false;
     }
 
     public function set(string $key, $value): void

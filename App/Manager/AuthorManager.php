@@ -3,6 +3,8 @@
 namespace App\Manager;
 
 use App\Entity\Author;
+use App\Framework\Actions\Password;
+use App\Framework\Session\Session;
 
 class AuthorManager extends BaseManager
 {
@@ -33,11 +35,13 @@ class AuthorManager extends BaseManager
 
     public function isAdmin($id): bool
     {
-        $query = $this->db->pepare('SELECT isAdmin FROM author WHERE id = :id');
+        $query = $this->db->prepare('SELECT isAdmin FROM author WHERE id = :id');
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
         $query->execute();
+        var_dump($id);
+        $data = $query->fetch();
 
-        return $query->fetch();
+        return $data[0];
     }
 
     public function add(Author $author): bool
@@ -51,5 +55,40 @@ class AuthorManager extends BaseManager
         $request->bindValue(':admin', $author->isAdmin(), \PDO::PARAM_INT);
 
         return $request->execute();
+    }
+
+    public function passwordCheck(string $password, string $mail): bool
+    {
+        if ( !$this->mailCheck($mail)) {
+            return false;
+        }
+        $id = $this->mailCheck($mail);
+        $query = $this->db->prepare("SELECT password FROM author WHERE mail = :mail");
+        $query->bindValue(':mail', $mail, \PDO::PARAM_STR);
+        $query->execute();
+        $data = $query->fetch();
+        $passwordCheck = new Password();
+        if ($passwordCheck->isValidPassword($password, $data['password'])) {
+            $session = new Session();
+            $session->set('id', $id);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function mailCheck(string $mail)
+    {
+        $query = $this->db->prepare("SELECT id FROM author WHERE mail = :mail");
+        $query->bindValue(':mail', $mail, \PDO::PARAM_STR);
+        $query->execute();
+        $data = $query->fetch();
+
+        if ($data) {
+            return $data['id'];
+        }
+
+        return false;
     }
 }

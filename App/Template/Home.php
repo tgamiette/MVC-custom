@@ -2,7 +2,6 @@
 <?php
 
 var_dump($posts[0]);
-
 printf($posts[0]->getId());
 
 ?>

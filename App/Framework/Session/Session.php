@@ -4,6 +4,10 @@ namespace App\Framework\Session;
 
 class Session
 {
+    public function __construct() {
+        $this->started();
+    }
+
     public function get(string $key, $default = null)
     {
         $this->started();

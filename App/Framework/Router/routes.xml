@@ -5,14 +5,13 @@
 
     <!--    Administration-->
     <route p="admin" controller="AdminController" action="Post" params="id"/>
-    <route p="user-list" controller="AdminController" action="GetAllUsers" params="id"/>
+    <route p="user-list" controller="AdminController" action="AllUsers" params="id"/>
     <route p="delete-comment" controller="AdminController" action="Post" params="id"/>
     <route p="delete-article" controller="AdminController" action="Post" params="id"/>
 
     <!--    Security-->
-    <route p="singin" controller="SecurityController" action="isSessionActive"/>
-    <route p="login" controller="SecurityController" action="checkCnx" params="mail,pwd"/>
-    <route p="logout" controller="SecurityController" action="Post"/>
+    <route p="singin" controller="SecurityController" action="CheckCnx"/>
+    <route p="logout" controller="SecurityController" action="Logout"/>
     <route p="signup" controller="SecurityController" action="Post"/>
     <route p="update-user" controller="SecurityController" action="Post" params="id"/>
 

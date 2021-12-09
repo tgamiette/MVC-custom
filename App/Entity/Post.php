@@ -16,23 +16,6 @@ class Post extends BaseEntity implements \JsonSerializable
     private Author $author;
     private \DateTime $publishedAt;
 
-    /**
-     * @return string
-     */
-    public function getPublishedAt(): string
-    {
-        return $this->publishedAt->format('Y-m-d H:i:s');
-    }
-
-    /**
-     * @param string $publishedAt
-     * @throws Exception
-     */
-    public function setPublishedAt(string $publishedAt): void
-    {
-        $this->publishedAt = new DateTime($publishedAt);
-    }
-
     public function setPublishedAtObject(DateTime $publishedAt): void
     {
         $this->publishedAt = $publishedAt;
@@ -57,27 +40,12 @@ class Post extends BaseEntity implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
+            'id' => $this->id,
             'title' => $this->getTitle(),
             'content' => $this->getContent(),
             'author' => $this->getAuthor(),
-
+            'publishedAt'=> $this->getPublishedAt(),
         ];
-    }
-
-    /**
-     * @return Author
-     */
-    public function getAuthor(): Author
-    {
-        return $this->author;
-    }
-
-    /**
-     * @param Author $author
-     */
-    public function setAuthor(int $author): void
-    {
-        $this->author = (new AuthorManager())->findById($author);
     }
 
     /**
@@ -110,6 +78,39 @@ class Post extends BaseEntity implements \JsonSerializable
     public function setContent(string $content): void
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return Author
+     */
+    public function getAuthor(): Author
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param Author $author
+     */
+    public function setAuthor(int $author): void
+    {
+        $this->author = (new AuthorManager())->findById($author);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPublishedAt(): string
+    {
+        return $this->publishedAt->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * @param string $publishedAt
+     * @throws Exception
+     */
+    public function setPublishedAt(string $publishedAt): void
+    {
+        $this->publishedAt = new DateTime($publishedAt);
     }
 
 

@@ -79,7 +79,6 @@ class PostController extends BaseController
         $image = new Image($array);
         var_dump($image);
         var_dump($imagemanager->add($image));
-        die();
         $this->render('Test.php', [], "TEST");
     }
 
@@ -115,11 +114,12 @@ class PostController extends BaseController
             $postManager = new PostManager();
             $postManager->add($post);
         }
+    }
 
 
-        publicfunction getDeletePost($params)
+    public function getDeletePost($params)
     {
-    $idPost = $params['id'];
+        $idPost = $params['id'];
         $session = new Session();
 
         $Postmanager = new PostManager();

@@ -47,14 +47,18 @@ class PostController extends BaseController
             $postId = $params['id'];
             $publishedAt = 'now';
 
-            $comment = new Comment(['author' => $authorId, 'content' => $content, 'publishedAt' => $publishedAt, 'post' => $postId]);
+            $comment = new Comment([
+                                       'author' => $authorId,
+                                       'content' => $content,
+                                       'publishedAt' => $publishedAt,
+                                       'post' => $postId,
+                                   ]);
             $commentManager = new CommentManager();
             $commentManager->add($comment);
 
-            header('Location: /post/' . $params['id']);
+            header('Location: /post/'.$params['id']);
             exit();
         }
-        
     }
 
     public function getTest($params)
@@ -110,20 +114,12 @@ class PostController extends BaseController
                              ]);
             $postManager = new PostManager();
             $postManager->add($post);
-
-<<<<<<< HEAD
-            header('Location: /'); //enlever ?p= et &id= quand htaccess est activé  
-            exit();
-=======
-            header('Location: /?p=/'); //enlever ?p= et &id= quand htaccess est activé  
->>>>>>> 5f3e4a123ec2a2bb4ef0bc2ffaa7dc49abeaf414
         }
-    }
 
-    public
-    function getDeletePost($params)
+
+        publicfunction getDeletePost($params)
     {
-        $idPost = $params['id'];
+    $idPost = $params['id'];
         $session = new Session();
 
         $Postmanager = new PostManager();

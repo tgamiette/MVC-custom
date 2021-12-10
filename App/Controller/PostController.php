@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Framework\Database\PDOFactory;
 use App\Manager\PostManager;
+use App\Entity\Post;
 
 class PostController extends BaseController
 {
@@ -38,6 +39,35 @@ class PostController extends BaseController
     {
         var_dump($_FILES);die();
         $this->render('Test.php', [],"TEST");
+    }
+
+    public function getNewPost($params) {
+        if (empty($params['id'])) {
+            $this->render('404.php', ['msg' => "Il manque peut être l'id de l'auteur dans l'url"], "Page non trouvé");
+        } 
+        else {
+            $this->render('post.php', [], "New Post");
+        }
+    }
+
+    public function postNewPost($params) {
+        if (empty($params['id'])) {
+            return $this->render('404.php', ['msg' => "Il manque peut être l'id de l'auteur dans l'url"], "Page non trouvé");
+        } 
+        if (isset($_POST['content']) && isset($_POST['title'])) {
+            $content = $_POST['content'];
+            $title = $_POST['title'];
+            $author = $params['id'];
+            $publishedAt = 'now';
+
+            $post = new Post(['content' => $content, 'title' => $title, 'author' => $author, 'publishedAt' => $publishedAt]);
+            $postManager = new PostManager();
+            $postManager->add($post);
+
+            header('Location: /?p=/'); //enlever ?p= et &id= quand htaccess est activé  
+            exit();
+        }
+
     }
 
 

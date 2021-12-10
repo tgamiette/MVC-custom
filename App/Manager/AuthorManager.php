@@ -41,7 +41,7 @@ class AuthorManager extends BaseManager
         var_dump($id);
         $data = $query->fetch();
 
-        return $data[0];
+        return $data;
     }
 
     public function add(Author $author): bool

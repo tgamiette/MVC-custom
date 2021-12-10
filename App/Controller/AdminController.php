@@ -10,19 +10,15 @@ class AdminController extends BaseController
 {
     public function getAllUsers()
     {
-
-        $session = new Session();
-        if (isset($_SESSION['id'])) {
             $authorManager = new AuthorManager();
-            $userIsAdmin = $authorManager->isAdmin($_SESSION['id']);
-            
-            if (!$userIsAdmin)
-            return;
-
             $users = $authorManager->findAll();
-            $this->render('UserList.php', ['users' => $users], 'Users List');  
-        }
-        else 
-            return;
+            $this->render('UserList.php', ['users' => $users], 'Users List');
+    }
+    public function getEditUser($params)
+    {
+        $id= $params['id'];
+        $authorManager = new AuthorManager();
+        $user = $authorManager->findById($id);
+        $this->render('editAuthor.php', ['user' => $user], 'updateUser');
     }
 }

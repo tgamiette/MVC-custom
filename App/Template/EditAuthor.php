@@ -1,34 +1,24 @@
 
-
-<!DOCTYPE html>
-
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <title>Edit Author</title>
-
-</head>
-
-<body>
 <form action="#changer l'action" method="post" class="container w-25 shadow my-5 ">
   <h2 class="text-center">Edit author</h2>
   <div class="form-group">
-    <input type="text" name="name" class="form-control" placeholder="<php=$name?>" required="required"autocomplete="off">
+    <input type="text" name="firstName" class="form-control" placeholder="Prénom" value= <?echo($user->getfirstName())?> required="required"autocomplete="off">
   </div>
   <div class="form-group">
-    <input type="email" name="email" class="form-control" placeholder="<php=$email?>" required="required" autocomplete="off">
+    <input type="text" name="lastName" class="form-control" placeholder="Nom" value= <?echo($user->getlastName())?> required="required" autocomplete="off">
   </div>
   <div class="form-group">
-    <input type="password" name="password" class="form-control" placeholder="<php=$password?>" required="required" autocomplete="off">
+    <input type="email" name="mail" class="form-control my-2" placeholder="email" value= <?echo($user->getmail())?> required="required" autocomplete="off">
   </div>
-  <div class="form-group">
-    <input type="checkbox" name="admin" id="admin" class="m-2" placeholder="<php=$password?>" required="required" autocomplete="off"><label for="admin">admin</label>
-  </div>
+  <? if($user->isAdmin()== 1 ){ ?>
+      <input type="checkbox" id="admin" checked>
+
+    <? }else{?>
+
+      <input type="checkbox"name="admin" id="admin" >
+    <?}?>
+    <label for="admin">Admin</label>
   <div class="form-group text-center mt-2">
-    <button type="submit" class="btn btn-success btn-block">Connexion</button>
+    <button type="submit" class="btn btn-success btn-block my-2">Modifier</button>
   </div>
 </form>
-</body>
-</html>

@@ -7,7 +7,9 @@
 
     <!--    Administration-->
     <route p="admin" controller="AdminController" action="Post" params="id"/>
-    <route p="user-list" controller="AdminController" action="AllUsers" params="id"/>
+    <route p="user-list" controller="AdminController" action="allUsers" params="id"/>
+    <route p="editauthor" controller="AdminController" action="EditUser" params="id"/>
+
     <route p="delete-comment" controller="AdminController" action="Post" params="id"/>
     <route p="delete-article" controller="AdminController" action="Post" params="id"/>
 

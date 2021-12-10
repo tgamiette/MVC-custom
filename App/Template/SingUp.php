@@ -27,7 +27,7 @@
 <!--        <input type="password" name="password_retype" class="form-control" placeholder="Confirmez le mot de passe" required="required" autocomplete="off">-->
 <!--    </div>-->
     <div class="form-group text-center mt-2">
-        <button type="submit" class="btn btn-success btn-block">Connexion</button>
+        <button type="submit" class="btn btn-success btn-block">Inscription</button>
     </div>
 </form>
 </body>

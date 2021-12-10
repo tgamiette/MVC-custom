@@ -96,13 +96,13 @@ class  CommentManager extends BaseManager
         return ($idUser == $result['author']);
     }
 
-    public function getAuthorComment($idcomment)
+    public function getAuthorComment(int $idcomment)
     {
         $query = $this->db->prepare('SELECT author FROM comment WHERE id = :id');
         $query->bindValue(':id', $idcomment, \PDO::PARAM_INT);
         $query->execute();
-//        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\Comment.php');
-        return new Comment($query->fetch(\PDO::FETCH_ASSOC));
+        var_dump($query->fetch()); die;
+//        return new Comment($query->fetch(\PDO::FETCH_ASSOC));
     }
 
 

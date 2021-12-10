@@ -101,7 +101,7 @@ class PostController extends BaseController
 
         if ($session->get("id") == $author) {
             $Postmanager->deleteById($idPost);
-            header("location: /post/$");
+            header("location: /");
         }
     }
 }

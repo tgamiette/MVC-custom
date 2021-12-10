@@ -48,7 +48,7 @@ class PostManager extends BaseManager
         $request = $this->db->prepare($sql);
         $request->bindValue(':title', $post->getTitle(), \PDO::PARAM_STR);
         $request->bindValue(':content', $post->getContent(), \PDO::PARAM_STR);
-        $request->bindValue(':author', $post->getAuthor(), \PDO::PARAM_INT);
+        $request->bindValue(':author', $post->getAuthor()->getId(), \PDO::PARAM_INT);
         $request->bindValue(':date_published', $post->getPublishedAt(), \PDO::PARAM_STR);
 
         return $request->execute();

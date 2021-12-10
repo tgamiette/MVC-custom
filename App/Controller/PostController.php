@@ -66,53 +66,48 @@ class PostController extends BaseController
         $this->render('Test.php', [], "TEST");
     }
 
-//    public function postTest($params)
-//    {
-//        $imagemanager = new ImageManager();
-//        $array = array(
-//            'img_nom' => $_FILES['image']['name'],
-//            'img_taille' => $_FILES['image']['size'],
-//            'img_type' => $_FILES['image']['type'],
-//            'img_desc' => 'image',
-//            'img_blob' => file_get_contents($_FILES['image']['tmp_name']),
-//        );
-//        $image = new Image($array);
-//        var_dump($image);
-//        var_dump($imagemanager->add($image));
-//        $this->render('Test.php', [], "TEST");
-//    }
+    //    public function postTest($params)
+    //    {
+    //        $imagemanager = new ImageManager();
+    //        $array = array(
+    //            'img_nom' => $_FILES['image']['name'],
+    //            'img_taille' => $_FILES['image']['size'],
+    //            'img_type' => $_FILES['image']['type'],
+    //            'img_desc' => 'image',
+    //            'img_blob' => file_get_contents($_FILES['image']['tmp_name']),
+    //        );
+    //        $image = new Image($array);
+    //        var_dump($image);
+    //        var_dump($imagemanager->add($image));
+    //        $this->render('Test.php', [], "TEST");
+    //    }
 
     public function getNewPost($params)
     {
         if (empty($params['id'])) {
-            $this->render('404.php', ['msg' => "Il manque peut être l'id de l'auteur dans l'url"], "Page non trouvé");
-        } else {
-            $this->render('post.php', [], "New Post");
+            $this->render('404.php',
+                          ['msg' => "Il manque peut être l'id de l'auteur dans l'url"],
+                          "Page non trouvé"
+            );
         }
+        $this->render('post.php', [], "New Post");
     }
 
     public function postNewPost($params)
     {
         if (empty($params['id'])) {
             $this->render('404.php',
-                                 ['msg' => "Il manque peut être l'id de l'auteur dans l'url"],
-                                 "Page non trouvé"
+                          ['msg' => "Il manque peut être l'id de l'auteur dans l'url"],
+                          "Page non trouvé"
             );
         }
         if (isset($_POST['content']) && isset($_POST['title'])) {
-            $content = $_POST['content'];
-            $title = $_POST['title'];
-            $author = $params['id'];
-            $publishedAt = 'now';
-
-            $post = new Post([
-                                 'content' => $content,
-                                 'title' => $title,
-                                 'author' => $author,
-                                 'publishedAt' => $publishedAt,
-                             ]);
+            $post = new Post($_POST);
+            $post->setAuthor($params['id']);
+            $post->setPublishedAtObjet(new \DateTime());
             $postManager = new PostManager();
             $postManager->add($post);
+            header("location: /");
         }
     }
 

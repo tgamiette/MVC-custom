@@ -30,6 +30,7 @@ class SecurityController extends BaseController
         if (isset($pwd) && isset($mail)) {
             $authorManager = new AuthorManager();
             $id = $authorManager->passwordCheck($pwd, $mail);
+
             if ($id) {
                 $session = new Session();
                 $session->set('id', $id);

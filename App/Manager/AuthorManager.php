@@ -29,7 +29,6 @@ class AuthorManager extends BaseManager
         if ($result != false) {
             return new Author($result);
         }
-
     }
 
     public function isAdmin($id): bool
@@ -55,9 +54,8 @@ class AuthorManager extends BaseManager
         return $request->execute();
     }
 
-    public function passwordCheck(string $password, string $mail): bool
+    public function passwordCheck(string $password, string $mail)
     {
-
         if ( !$this->mailCheck($mail)) {
             return false;
         }
@@ -91,7 +89,8 @@ class AuthorManager extends BaseManager
     {
         $query = $this->db->prepare("DELETE FROM author WHERE id = :id;
                                             DELETE FROM post WHERE author = :id;
-                                            DELETE FROM comment WHERE author = :id");
+                                            DELETE FROM comment WHERE author = :id"
+        );
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
         $result = $query->execute();
     }

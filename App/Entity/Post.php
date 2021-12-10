@@ -44,7 +44,7 @@ class Post extends BaseEntity implements \JsonSerializable
             'title' => $this->getTitle(),
             'content' => $this->getContent(),
             'author' => $this->getAuthor(),
-            'publishedAt'=> $this->getPublishedAt(),
+            'publishedAt' => $this->getPublishedAt(),
         ];
     }
 
@@ -89,7 +89,7 @@ class Post extends BaseEntity implements \JsonSerializable
     }
 
     /**
-     * @param Author $author
+     * @param int $author
      */
     public function setAuthor(int $author): void
     {
@@ -111,6 +111,11 @@ class Post extends BaseEntity implements \JsonSerializable
     public function setPublishedAt(string $publishedAt): void
     {
         $this->publishedAt = new DateTime($publishedAt);
+    }
+
+    public function setPublishedAtObjet($datatime): void
+    {
+        $this->publishedAt = $datatime;
     }
 
 

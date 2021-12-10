@@ -10,5 +10,8 @@
       "name": "teddy",
       "email": "tgamiette@kernix.com"
     }
-  ]
+  ],
+  "require": {
+    "ext-json": "*"
+  }
 }

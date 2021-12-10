@@ -33,6 +33,7 @@ class  CommentManager extends BaseManager
     {
         $query = $this->db->prepare('DELETE FROM comment WHERE id = :id');
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
+
         return $query->execute();
     }
 
@@ -48,17 +49,17 @@ class  CommentManager extends BaseManager
         return $request->execute();
     }
 
-        public function update(Comment $comment): bool
-        {
-            $sql = "INSERT INTO comment (author, `content`, publishedAt, post) VALUES (:author_id, :content, :date_published, :post_id);";
-            $request = $this->db->prepare($sql);
-            $request->bindValue(':author_id', $comment->getAuthor()->getId(), \PDO::PARAM_INT);
-            $request->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
-            $request->bindValue(':date_published', $comment->getPublishedAt(), \PDO::PARAM_STR);
-            $request->bindValue(':post_id', $comment->getPost()->getId(), \PDO::PARAM_INT);
+    public function update(Comment $comment): bool
+    {
+        $sql = "INSERT INTO comment (author, `content`, publishedAt, post) VALUES (:author_id, :content, :date_published, :post_id);";
+        $request = $this->db->prepare($sql);
+        $request->bindValue(':author_id', $comment->getAuthor()->getId(), \PDO::PARAM_INT);
+        $request->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
+        $request->bindValue(':date_published', $comment->getPublishedAt(), \PDO::PARAM_STR);
+        $request->bindValue(':post_id', $comment->getPost()->getId(), \PDO::PARAM_INT);
 
-            return $request->execute();
-        }
+        return $request->execute();
+    }
 
     public function deleteByPostId(int $id): bool
     {
@@ -85,5 +86,24 @@ class  CommentManager extends BaseManager
 
         return $request->execute();
     }
+
+    public function hasAccess(int $idComment, $idUser): bool
+    {
+        $query = $this->db->prepare('select author FROM comment WHERE comment.id = :id');
+        $query->bindValue(':id', $idComment, \PDO::PARAM_INT);
+        $result = $query->fetch(\PDO::FETCH_ASSOC);
+
+        return ($idUser == $result['author']);
+    }
+
+    public function getAuthorComment($idcomment)
+    {
+        $query = $this->db->prepare('SELECT author FROM comment WHERE id = :id');
+        $query->bindValue(':id', $idcomment, \PDO::PARAM_INT);
+        $query->execute();
+//        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\Comment.php');
+        return new Comment($query->fetch(\PDO::FETCH_ASSOC));
+    }
+
 
 }

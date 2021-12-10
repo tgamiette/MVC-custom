@@ -20,8 +20,7 @@ class ApiController extends BaseController
         } else {
             $posts = $postmanager->findById($id);
         }
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($posts);
+        $this->renderJSON($posts);
     }
 
     public function postPost($params)
@@ -30,8 +29,11 @@ class ApiController extends BaseController
         $id = (int)$params['id'];
         $Postmanager = new PostManager();
         $result = $Postmanager->add($post);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($result);
+        if ($result) {
+            $this->renderJSON("Mise a jour Ok");
+        } else {
+            $this->renderJSON("Mise a jour KOOOOOO");
+        }
     }
 
 
@@ -42,20 +44,32 @@ class ApiController extends BaseController
         $commentmanager = new CommentManager();
         $result = $Postmanager->deleteById($id);
         $commentmanager->deleteByPostId($id);
-        $this->renderJSON($result);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($result);
+        if ($result) {
+            $this->renderJSON("Mise a jour Ok");
+        } else {
+            $this->renderJSON("Mise a jour KOOOOOO");
+        }
     }
 
 
     public function putPost($params)
     {
-        $id = (int)$params['id'];;
-        $postmanager = new PostManager();
-        $post = new Post($_POST);
-        $result = $postmanager->update($id, $post);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($result);
+        parse_str(file_get_contents("php://input"), $_PUT);
+        $id = (int)$params['id'];
+
+        if ($id == 0 || empty($_PUT['author']) || empty($_PUT['content']) || empty($_PUT['publishedAt']) || empty($_PUT['title'])) {
+            $this->renderJSON("il manque l'id ou des paramètres");
+        } else {
+            $postmanager = new PostManager();
+            $post = $postmanager->findById($id);
+
+            $result = $postmanager->update($post);
+            if ($result) {
+                $this->renderJSON("Mise a jour Ok");
+            } else {
+                $this->renderJSON("Mise a jour KOOOOOO");
+            }
+        }
     }
 
     public function getComment($params)
@@ -67,16 +81,20 @@ class ApiController extends BaseController
         } else {
             $comments = $Commentmanager->findById($id);
         }
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($comments);
+        $this->renderJSON($comments);
     }
 
     public function postComment($params)
     {
         $comment = new Comment($_POST);
+        //        var_dump($comment);
         $Commentmanager = new CommentManager();
         $result = $Commentmanager->add($comment);
-        $this->renderJSON($result);
+        if ($result) {
+            $this->renderJSON("Mise a jour Ok");
+        } else {
+            $this->renderJSON("Mise a jour KOOOOOO");
+        }
     }
 
 
@@ -84,12 +102,14 @@ class ApiController extends BaseController
     {
         $id = (int)$params['id'];
         $Commentmanager = new CommentManager();
-        $comments = $Commentmanager->deleteById($id);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode("test");
+        $result = $Commentmanager->deleteById($id);
+        if ($result) {
+            $this->renderJSON("Mise a jour Ok");
+        } else {
+            $this->renderJSON("Mise a jour KOOOOOO");
+        }
     }
 
-    //Doit changer tout les paramètres
     public function putComment($params)
     {
         parse_str(file_get_contents("php://input"), $_PUT);
@@ -124,6 +144,4 @@ class ApiController extends BaseController
         $result = $commentmanager->updatebyId($id, $Comment);
         $this->renderJSON($result);
     }
-
-
 }

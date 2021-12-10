@@ -36,7 +36,7 @@ class PostController extends BaseController
     }
     public function postTest($params)
     {
-        var_dump($_POST);die();
+        var_dump($_FILES);die();
         $this->render('Test.php', [],"TEST");
     }
 

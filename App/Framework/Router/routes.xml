@@ -3,6 +3,7 @@
     <route p="/" controller="PostController" action="Index"/>
     <route p="post" controller="PostController" action="post" params="id"/>
     <route p="test" controller="PostController" action="test" params=""/>
+    <route p="new-post" method="post" controller="PostController" action="NewPost" params="id"/>
 
     <!--    Administration-->
     <route p="admin" controller="AdminController" action="Post" params="id"/>

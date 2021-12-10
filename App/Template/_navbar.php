@@ -12,7 +12,7 @@
             </div>
              <?php
              if ( (new \App\Framework\Session\Session())->get("id")) : ?>
-              <a href="/" class="btn btn-secondary mx-2">Créer un Post</a>
+              <a href="new-post/<?php echo((new \App\Framework\Session\Session())->get('id')) ?>" class="btn btn-secondary mx-2">Créer un Post supprimé ?p=</a>
             <?endif; ?>
             <div>
                 <?php

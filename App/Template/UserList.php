@@ -7,8 +7,8 @@
         <div><?php  echo($user->getMail()) ?></div>
 
 
-        <a class="btn btn-secondary" href="EditAuthor/<?php echo($user->getid()) ?>">Update</a>
-        <a class="btn btn-danger" href="EditAuthor/<?php echo($user->getid()) ?>">Delete</a>
+        <a class="btn btn-secondary" href="/editauthor/<?php echo($user->getid()) ?>">Update</a>
+        <a class="btn btn-danger" href="/editauthor/<?php echo($user->getid()) ?>">Delete</a>
     </div>
     <? } ?>
 </div>

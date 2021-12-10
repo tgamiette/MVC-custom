@@ -10,15 +10,24 @@ class AdminController extends BaseController
 {
     public function getAllUsers()
     {
-            $authorManager = new AuthorManager();
-            $users = $authorManager->findAll();
-            $this->render('UserList.php', ['users' => $users], 'Users List');
+        $authorManager = new AuthorManager();
+        $users = $authorManager->findAll();
+        $this->render('UserList.php', ['users' => $users], 'Users List');
     }
+
     public function getEditUser($params)
     {
-        $id= $params['id'];
+        $id = $params['id'];
         $authorManager = new AuthorManager();
         $user = $authorManager->findById($id);
-        $this->render('editAuthor.php', ['user' => $user], 'updateUser');
+        $this->render('EditAuthor.php', ['user' => $user], 'updateUser');
+    }
+
+    public function getDeleteUser($params)
+    {
+        $id = intval($params['id']);
+        $authorManager = new AuthorManager();
+        $authorManager->deleteById($id);
+        header("location: /user-list");
     }
 }

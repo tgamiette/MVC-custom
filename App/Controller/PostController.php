@@ -19,6 +19,7 @@ class PostController extends BaseController
     public function getIndex()
     {
         $postmanager = new PostManager();
+
         $posts = $postmanager->findAll();
         $this->render('Home.php', ['posts' => $posts], "Les posts");
     }
@@ -38,7 +39,7 @@ class PostController extends BaseController
     public function postPost($params)
     {
         if (empty($params['id'])) {
-            return $this->render('404.php', ['msg' => "Il manque l'id dans l'url peut être"], "Page non trouvé");
+            $this->render('404.php', ['msg' => "Il manque l'id dans l'url peut être"], "Page non trouvé");
         }
         if ($_POST['content']) {
             $content = $_POST['content'];
@@ -57,7 +58,6 @@ class PostController extends BaseController
             $commentManager->add($comment);
 
             header('Location: /post/'.$params['id']);
-            exit();
         }
     }
 
@@ -66,21 +66,21 @@ class PostController extends BaseController
         $this->render('Test.php', [], "TEST");
     }
 
-    public function postTest($params)
-    {
-        $imagemanager = new ImageManager();
-        $array = array(
-            'img_nom' => $_FILES['image']['name'],
-            'img_taille' => $_FILES['image']['size'],
-            'img_type' => $_FILES['image']['type'],
-            'img_desc' => 'image',
-            'img_blob' => file_get_contents($_FILES['image']['tmp_name']),
-        );
-        $image = new Image($array);
-        var_dump($image);
-        var_dump($imagemanager->add($image));
-        $this->render('Test.php', [], "TEST");
-    }
+//    public function postTest($params)
+//    {
+//        $imagemanager = new ImageManager();
+//        $array = array(
+//            'img_nom' => $_FILES['image']['name'],
+//            'img_taille' => $_FILES['image']['size'],
+//            'img_type' => $_FILES['image']['type'],
+//            'img_desc' => 'image',
+//            'img_blob' => file_get_contents($_FILES['image']['tmp_name']),
+//        );
+//        $image = new Image($array);
+//        var_dump($image);
+//        var_dump($imagemanager->add($image));
+//        $this->render('Test.php', [], "TEST");
+//    }
 
     public function getNewPost($params)
     {
@@ -94,7 +94,7 @@ class PostController extends BaseController
     public function postNewPost($params)
     {
         if (empty($params['id'])) {
-            return $this->render('404.php',
+            $this->render('404.php',
                                  ['msg' => "Il manque peut être l'id de l'auteur dans l'url"],
                                  "Page non trouvé"
             );

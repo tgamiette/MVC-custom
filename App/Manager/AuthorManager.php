@@ -30,7 +30,6 @@ class AuthorManager extends BaseManager
             return new Author($result);
         }
 
-        return [];
     }
 
     public function isAdmin($id): bool
@@ -38,7 +37,6 @@ class AuthorManager extends BaseManager
         $query = $this->db->prepare('SELECT admin FROM author WHERE id = :id');
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
         $query->execute();
-        var_dump($id);
         $data = $query->fetch();
 
         return $data;
@@ -59,6 +57,7 @@ class AuthorManager extends BaseManager
 
     public function passwordCheck(string $password, string $mail): bool
     {
+
         if ( !$this->mailCheck($mail)) {
             return false;
         }
@@ -77,14 +76,23 @@ class AuthorManager extends BaseManager
 
     public function mailCheck(string $mail)
     {
-        $query = $this->db->prepare("SELECT id FROM author WHERE mail = :mail");
-        $query->bindValue(':mail', $mail, \PDO::PARAM_STR);
+        $query = $this->db->prepare("SELECT `id` FROM author WHERE `mail` = :mail;");
+        $query->bindValue(":mail", $mail, \PDO::PARAM_STR);
         $query->execute();
-        $data = $query->fetch();
+        $data = $query->fetch(\PDO::FETCH_ASSOC);
         if ($data) {
             return $data['id'];
         }
 
         return false;
+    }
+
+    public function deleteById(int $id)
+    {
+        $query = $this->db->prepare("DELETE FROM author WHERE id = :id;
+                                            DELETE FROM post WHERE author = :id;
+                                            DELETE FROM comment WHERE author = :id");
+        $query->bindValue(':id', $id, \PDO::PARAM_INT);
+        $result = $query->execute();
     }
 }

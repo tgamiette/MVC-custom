@@ -62,13 +62,10 @@ class SecurityController extends BaseController
         $author= new Author($_POST);
         $author->setAdmin(0);
         $author->setPassword($pass->hash($author->getPassword()));
-//        var_dump($author);
         $result= $authormanager->add($author);
         if ($result)
             $flash->setFlash("Inscription réussi");
             header("Location: /");
-            exit;
-//            $this->render('SingUp.php', ['flash'=>], 'Inscription');
     }
 
 }

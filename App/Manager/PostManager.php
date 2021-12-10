@@ -27,7 +27,6 @@ class PostManager extends BaseManager
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
         $query->execute();
         $result = $query->fetch(\PDO::FETCH_ASSOC);
-        //        var_dump($result);
         if ($result != false) {
             return new Post($result);
         }

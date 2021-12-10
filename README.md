@@ -30,7 +30,7 @@ uniqumement les posts et les commentaires ont été configuré pour l'api
 
 
 ###défaut du site
-
+ATTENTION si il y a la suppresion d'un post l'hydratation ne marche plus car j'instancie constaement une classe 
  - La page d'administration n'a pas été configuré donc impossibilité de supprimer les post ou les commentaires ou les user
  - la verification des variables de session n'a pas été utilisé completement (uniquement pour la connexion )
  - Le bonus du projet a été abandonné par mes soins ayant voulu stocké l'image en BDD :-) et voyant qu'il manquait

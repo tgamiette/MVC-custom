@@ -10,7 +10,10 @@
 
                 </ul>
             </div>
-            <a href="/" class="btn btn-secondary mx-2">Créer un Post</a>
+             <?php
+             if ( (new \App\Framework\Session\Session())->get("id")) : ?>
+              <a href="/" class="btn btn-secondary mx-2">Créer un Post</a>
+            <?endif; ?>
             <div>
                 <?php
                 if ( !(new \App\Framework\Session\Session())->get("id")) : ?>

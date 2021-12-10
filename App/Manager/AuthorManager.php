@@ -62,13 +62,14 @@ class AuthorManager extends BaseManager
         if ( !$this->mailCheck($mail)) {
             return false;
         }
+        $id = $this->mailCheck($mail);
         $query = $this->db->prepare("SELECT password FROM author WHERE mail = :mail");
         $query->bindValue(':mail', $mail, \PDO::PARAM_STR);
         $query->execute();
         $data = $query->fetch(\PDO::FETCH_ASSOC);
         $passwordcheck = new Password();
         if ($passwordcheck->isValidPassword($password, $data['password'])) {
-            return true;
+            return $id;
         } else {
             return false;
         }
@@ -80,9 +81,8 @@ class AuthorManager extends BaseManager
         $query->bindValue(':mail', $mail, \PDO::PARAM_STR);
         $query->execute();
         $data = $query->fetch();
-
         if ($data) {
-            return true;
+            return $data['id'];
         }
 
         return false;

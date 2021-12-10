@@ -1,5 +1,7 @@
  <div class="navbar navbar-dark bg-dark">
             <a href="/" class="btn btn-secondary mx-2">Home</a>
+            <a href="/user-list" class="btn btn-secondary mx-2">user list</a>
+
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   Api
@@ -12,7 +14,7 @@
             </div>
              <?php
              if ( (new \App\Framework\Session\Session())->get("id")) : ?>
-              <a href="new-post/<?php echo((new \App\Framework\Session\Session())->get('id')) ?>" class="btn btn-secondary mx-2">Créer un Post supprimé ?p=</a>
+              <a href="new-post/<?php echo((new \App\Framework\Session\Session())->get('id')) ?>" class="btn btn-secondary mx-2">Créer un Post</a>
             <?endif; ?>
             <div>
                 <?php

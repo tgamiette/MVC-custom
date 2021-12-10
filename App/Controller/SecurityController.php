@@ -27,9 +27,9 @@ class SecurityController extends BaseController
         if (isset($pwd) && isset($mail)) {
             $authorManager = new AuthorManager();
             if ($authorManager->passwordCheck($pwd, $mail)) {
-                //                Manque pas le passage des identfiant de l'utilisateur dans la session ?'
+                $session = new Session();
+                $session->set('id', $mail);
                 header('Location: /');
-                //                return new PostController('Index', []);
             } else {
                 header('Location: /singin');
             }

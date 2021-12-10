@@ -20,7 +20,7 @@ class AuthorManager extends BaseManager
         return $result;
     }
 
-    public function findById(int $id): Author
+    public function findById(int $id)
     {
         $query = $this->db->prepare('SELECT * FROM author WHERE id = :id');
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
@@ -35,7 +35,7 @@ class AuthorManager extends BaseManager
 
     public function isAdmin($id): bool
     {
-        $query = $this->db->prepare('SELECT isAdmin FROM author WHERE id = :id');
+        $query = $this->db->prepare('SELECT admin FROM author WHERE id = :id');
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
         $query->execute();
         var_dump($id);
@@ -62,16 +62,12 @@ class AuthorManager extends BaseManager
         if ( !$this->mailCheck($mail)) {
             return false;
         }
-        $id = $this->mailCheck($mail);
         $query = $this->db->prepare("SELECT password FROM author WHERE mail = :mail");
         $query->bindValue(':mail', $mail, \PDO::PARAM_STR);
         $query->execute();
-        $data = $query->fetch();
-        $passwordCheck = new Password();
-        if ($passwordCheck->isValidPassword($password, $data['password'])) {
-            $session = new Session();
-            $session->set('id', $id);
-
+        $data = $query->fetch(\PDO::FETCH_ASSOC);
+        $passwordcheck = new Password();
+        if ($passwordcheck->isValidPassword($password, $data['password'])) {
             return true;
         } else {
             return false;
@@ -86,7 +82,7 @@ class AuthorManager extends BaseManager
         $data = $query->fetch();
 
         if ($data) {
-            return $data['id'];
+            return true;
         }
 
         return false;

@@ -27,9 +27,11 @@ class PostManager extends BaseManager
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
         $query->execute();
         $result = $query->fetch(\PDO::FETCH_ASSOC);
-//        var_dump($result);
-        if ($result!= false)
+        //        var_dump($result);
+        if ($result != false) {
             return new Post($result);
+        }
+
         return [];
     }
 
@@ -53,7 +55,7 @@ class PostManager extends BaseManager
         return $request->execute();
     }
 
-    public function update(int $id,Post $post): bool
+    public function update(Post $post): bool
     {
         $sql = "UPDATE `post` SET `title` = ':title',
                                     `content` = ':content',
@@ -62,13 +64,28 @@ class PostManager extends BaseManager
                         WHERE `post`.`id` = ':id';";
 
         $request = $this->db->prepare($sql);
-        $request->bindValue(':title', $post->getTitle()->getId(), \PDO::PARAM_INT);
+        $request->bindValue(':title', $post->getTitle(), \PDO::PARAM_STR);
         $request->bindValue(':content', $post->getContent(), \PDO::PARAM_STR);
-        $request->bindValue(':author', $post->getAuthor()->getId(), \PDO::PARAM_STR);
-        $request->bindValue(':date_published', $post->getPublishedAt(), \PDO::PARAM_INT);
+        $request->bindValue(':author', $post->getAuthor()->getId(), \PDO::PARAM_INT);
+        $request->bindValue(':date_published', $post->getPublishedAt(), \PDO::PARAM_STR);
 
         return $request->execute();
-
     }
 
+    public function updatebyId(int $id, Post $post)
+    {
+        $sql = "UPDATE `post` SET `author` = ':author_id',
+                                    `content` = ':content',
+                                    `publishedAt`= ':date_published',
+                                     `title` = ':title'
+                        WHERE `post`.`id` = ':id'";
+
+        $request = $this->db->prepare($sql);
+        $request->bindValue(':title', $post->getTitle(), \PDO::PARAM_STR);
+        $request->bindValue(':content', $post->getContent(), \PDO::PARAM_STR);
+        $request->bindValue(':author', $post->getAuthor()->getId(), \PDO::PARAM_INT);
+        $request->bindValue(':date_published', $post->getPublishedAt(), \PDO::PARAM_STR);
+
+        return $request->execute();
+    }
 }

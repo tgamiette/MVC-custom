@@ -9,7 +9,7 @@ class Password
         return password_hash($password,PASSWORD_DEFAULT);
     }
 
-    public function isValidPassword($password,$hash)
+    public function isValidPassword($password,$hash): bool
     {
         if ($password == $hash)
             return true;

@@ -11,6 +11,7 @@ abstract class BaseController
     /**
      * @param string $action
      * @param array $params
+     * @param string $method
      */
     public function __construct(string $action, array $params = [], $method = "get")
     {

@@ -29,4 +29,16 @@ class PostController extends BaseController
         }
     }
 
+    public function getTest($params)
+    {
+
+        $this->render('Test.php', [],"TEST");
+    }
+    public function postTest($params)
+    {
+        var_dump($_POST);die();
+        $this->render('Test.php', [],"TEST");
+    }
+
+
 }

@@ -11,20 +11,21 @@
 </head>
 
 <body>
-<form action="connexiontraitement.php" method="post" class="container w-25 shadow my-5">
+<form action="" method="post" class="container w-25 shadow my-5">
     <h2 class="text-center">Inscription</h2>
     <div class="form-group mt-2">
-        <input type="text" name="name" class="form-control" placeholder="Nom" required="required" autocomplete="off">
+        <input type="text" name="firstname" class="form-control" placeholder="Prénom" required="required" autocomplete="off">
+        <input type="text" name="lastname" class="form-control" placeholder="Nom" required="required" autocomplete="off">
     </div>
     <div class="form-group mt-2">
-        <input type="email" name="email" class="form-control" placeholder="Email" required="required"autocomplete="off">
+        <input type="email" name="mail" class="form-control" placeholder="Email" required="required"autocomplete="off">
     </div>
     <div class="form-group mt-2">
         <input type="password" name="password" class="form-control" placeholder="Mot de passe" required="required" autocomplete="off">
     </div>
-    <div class="form-group mt-2">
-        <input type="password" name="password_retype" class="form-control" placeholder="Confirmez le mot de passe" required="required" autocomplete="off">
-    </div>
+<!--    <div class="form-group mt-2">-->
+<!--        <input type="password" name="password_retype" class="form-control" placeholder="Confirmez le mot de passe" required="required" autocomplete="off">-->
+<!--    </div>-->
     <div class="form-group text-center mt-2">
         <button type="submit" class="btn btn-success btn-block">Connexion</button>
     </div>

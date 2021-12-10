@@ -91,4 +91,3 @@ class ImageManager extends BaseManager
         return $request->execute();
     }
 }
-}

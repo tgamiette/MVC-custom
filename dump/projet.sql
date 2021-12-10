@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : ven. 10 déc. 2021 à 15:23
+-- Généré le : ven. 10 déc. 2021 à 15:40
 -- Version du serveur : 10.6.4-MariaDB-1:10.6.4+maria~focal
 -- Version de PHP : 7.4.25
 
@@ -41,7 +41,7 @@ CREATE TABLE `author` (
 --
 
 INSERT INTO `author` (`id`, `lastName`, `firstName`, `password`, `mail`, `admin`) VALUES
-(20, 'fdfsd', 'dfsdfds', '$2y$10$FuId0hoJ9X.UnXUKW61WqucESgzRu/wZWE7wtvfcmU2YYnEtq4iTW', 'jean.bertrand@gmail.com', 0),
+(1, 'fdfsd', 'dfsdfds', '$2y$10$FuId0hoJ9X.UnXUKW61WqucESgzRu/wZWE7wtvfcmU2YYnEtq4iTW', 'jean.bertrand@gmail.com', 0),
 (21, 'hjgjh', 'gghhjk', '$2y$10$3Bvy6svZeFgYD7k986uquO7HUU88FRpBX8NImMg.MbRXq044UdlX6', 'jean.bertrand@gmail.com', 0),
 (22, 'api', 'api', '$2y$10$lmOhToB5rCb3y2yvJOE7zOwImTDEonjIHDHHVkJSnAQ/GGivwfbDi', 'jean.bertrand@gmail.com', 0),
 (23, 'api', 'api', '$2y$10$sgVDlNnV4Gknr2FF6lQxQusxDogp8hKtu7FYfJWCvjmTlV7hK2xCa', 'jean.bertrand@gmail.com', 0),
@@ -68,29 +68,29 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`id`, `author`, `content`, `publishedAt`, `post`) VALUES
-(1, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(2, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(4, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(1, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(2, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(4, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
 (6, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(7, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(8, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(9, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(10, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(11, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(12, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(13, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(14, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(15, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(16, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(17, 3, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
-(18, 3, 'vtf', '2021-12-16 11:28:00', 1),
-(19, 3, 'vtf', '2021-12-16 11:28:00', 1),
-(20, 3, 'vtf', '2021-12-16 11:28:00', 1),
-(21, 3, 'vtf', '2021-12-16 11:28:00', 1),
-(22, 3, 'vtf', '2021-12-16 11:28:00', 1),
-(23, 4, 'test api Post ', '1998-05-21 00:00:00', 2),
-(24, 4, 'test api Post ', '1998-05-21 00:00:00', 4),
-(30, 9, 'faker', '2021-05-21 18:43:43', 5);
+(7, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(8, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(9, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(10, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(11, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(12, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(13, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(14, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(15, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(16, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(17, 26, 'ceci est le contenu', '2021-12-16 11:28:00', 1),
+(18, 26, 'vtf', '2021-12-16 11:28:00', 1),
+(19, 26, 'vtf', '2021-12-16 11:28:00', 1),
+(20, 26, 'vtf', '2021-12-16 11:28:00', 1),
+(21, 26, 'vtf', '2021-12-16 11:28:00', 1),
+(22, 26, 'vtf', '2021-12-16 11:28:00', 1),
+(23, 26, 'test api Post ', '1998-05-21 00:00:00', 2),
+(24, 26, 'test api Post ', '1998-05-21 00:00:00', 4),
+(30, 26, 'faker', '2021-05-21 18:43:43', 5);
 
 -- --------------------------------------------------------
 
@@ -126,8 +126,8 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id`, `title`, `content`, `author`, `publishedAt`) VALUES
-(2, 'prime a la casse', 'cela à éé prolongé en 2022', 4, '2021-12-16 11:28:00'),
-(4, 'Ceci est un post officiel', 'non c\'est faux', 1, '2021-01-16 11:30:00'),
+(2, 'prime a la casse', 'cela à éé prolongé en 2022', 26, '2021-12-16 11:28:00'),
+(4, 'Ceci est un post officiel', 'non c\'est faux', 26, '2021-01-16 11:30:00'),
 (6, 'Ceci est un post officiel', 'non c\'est faux', 1, '2021-01-16 11:30:00'),
 (7, 'Ceci est un post officiel', 'non c\'est faux', 1, '2021-01-16 11:30:00'),
 (8, 'Ceci est un post officiel', 'non c\'est faux', 1, '2021-01-16 11:30:00'),

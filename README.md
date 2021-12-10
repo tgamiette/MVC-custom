@@ -9,7 +9,7 @@
 
 
 ###2. Database import
-`docker exec -i Projet-SQL mysql -uroot -pazerty mysql < /dump/faker.sql`
+`docker exec -i Projet-SQL mysql -uroot -pazerty mysql < dump/projet.sql`
 
 **Local URL**
 

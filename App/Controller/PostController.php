@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Framework\Database\PDOFactory;
 use App\Manager\PostManager;
+use App\Manager\CommentManager;
 use App\Entity\Post;
+use App\Entity\Comment;
+use App\Framework\Session\Session;
 
 class PostController extends BaseController
 {
@@ -28,6 +31,28 @@ class PostController extends BaseController
             $post = $postmanager->findById($id);
             $this->render('Show.php', ['post' => $post], $post->getTitle());
         }
+    }
+
+    public function postPost($params)
+    {
+        if (empty($params['id'])) {
+            return $this->render('404.php', ['msg' => "Il manque l'id dans l'url peut être"], "Page non trouvé");
+        }
+        if ($_POST['content']) {
+            $content = $_POST['content'];
+            $session = new Session();
+            $authorId = $session->get('id');
+            $postId = $params['id'];
+            $publishedAt = 'now';
+
+            $comment = new Comment(['author' => $authorId, 'content' => $content, 'publishedAt' => $publishedAt, 'post' => $postId]);
+            $commentManager = new CommentManager();
+            $commentManager->add($comment);
+
+            header('Location: /post/' . $params['id']);
+            exit();
+        }
+        
     }
 
     public function getTest($params)
@@ -64,7 +89,7 @@ class PostController extends BaseController
             $postManager = new PostManager();
             $postManager->add($post);
 
-            header('Location: /?p=/'); //enlever ?p= et &id= quand htaccess est activé  
+            header('Location: /'); //enlever ?p= et &id= quand htaccess est activé  
             exit();
         }
 
